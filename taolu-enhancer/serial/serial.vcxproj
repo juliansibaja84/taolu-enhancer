@@ -120,17 +120,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Visual Studio 2017\Projects\test\test\DBhandle.cpp" />
-    <ClCompile Include="..\..\..\..\Visual Studio 2017\Projects\test\test\Utils.cpp" />
     <ClCompile Include="Connect2Kinect.cpp" />
+    <ClCompile Include="DBhandle.cpp" />
     <ClCompile Include="taolu.cpp" />
+    <ClCompile Include="Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Visual Studio 2017\Projects\test\test\DBhandle.h" />
-    <ClInclude Include="..\..\..\..\Visual Studio 2017\Projects\test\test\Utils.h" />
+    <ClInclude Include="DBhandle.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Connect2Kinect.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
