@@ -1,5 +1,217 @@
-﻿  Joints.cpp
-c:\users\academic\taolu-enhancer\taolu-enhancer\serial\joints.cpp(229): warning C4305: '=': truncation from 'int' to 'char'
-c:\users\academic\taolu-enhancer\taolu-enhancer\serial\joints.cpp(229): warning C4309: '=': truncation of constant value
-  serial.vcxproj -> C:\Users\academic\taolu-enhancer\taolu-enhancer\Debug\serial.exe
-  serial.vcxproj -> C:\Users\academic\taolu-enhancer\taolu-enhancer\Debug\serial.pdb (Partial PDB)
+﻿  taolu.cpp
+c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): error C2144: error de sintaxis: 'int' debe estar precedido de ';'
+c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): error C2146: error de sintaxis: falta ';' delante del identificador 'NuiInitialize'
+c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(47): error C2065: '_In_': identificador no declarado
+c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(47): error C2146: error de sintaxis: falta ')' delante del identificador 'DWORD'
+c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(53): error C2144: error de sintaxis: 'int' debe estar precedido de ';'
+c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(53): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(53): error C2146: error de sintaxis: falta ';' delante del identificador 'NuiShutdown'
+c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(54): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(77): error C2065: 'SEVERITY_ERROR': identificador no declarado
+c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(77): error C3861: 'MAKE_HRESULT': no se encontró el identificador
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winnt.h(654): error C2378: 'HRESULT': nueva definición; no se puede sobrecargar el símbolo con typedef
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\utilapiset.h(95): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\utilapiset.h(95): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\utilapiset.h(94): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\utilapiset.h(100): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\utilapiset.h(105): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\utilapiset.h(105): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\utilapiset.h(104): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\utilapiset.h(110): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\processthreadsapi.h(1397): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\processthreadsapi.h(1397): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\processthreadsapi.h(1396): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\processthreadsapi.h(1401): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\processthreadsapi.h(1406): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\processthreadsapi.h(1406): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\processthreadsapi.h(1405): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\processthreadsapi.h(1410): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\sysinfoapi.h(730): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\sysinfoapi.h(730): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\sysinfoapi.h(729): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\sysinfoapi.h(733): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\realtimeapiset.h(151): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\realtimeapiset.h(151): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\realtimeapiset.h(150): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\realtimeapiset.h(154): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\realtimeapiset.h(159): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\realtimeapiset.h(159): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\realtimeapiset.h(158): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\realtimeapiset.h(164): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\realtimeapiset.h(169): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\realtimeapiset.h(169): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\realtimeapiset.h(168): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\realtimeapiset.h(174): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(5412): error C3646: 'hrFailure': especificador de invalidación desconocido
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(5412): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(5441): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(5441): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(5440): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(5446): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(27990): error C2433: 'HRESULT': '__forceinline' no se permite en las declaraciones de datos
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(27990): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(27990): error C2737: 'HRESULT': el objeto 'constexpr' debe inicializarse
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(27990): error C2373: 'HRESULT': nueva definición; modificadores de tipo distintos
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(27990): error C2146: error de sintaxis: falta ';' delante del identificador 'HRESULT_FROM_WIN32'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8251): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8251): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8250): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8257): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8261): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8261): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8260): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8262): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8266): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8266): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8265): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8270): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8274): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8274): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8273): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8275): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8289): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8289): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8288): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8296): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8300): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8300): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8299): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8306): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8320): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8320): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8319): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winbase.h(8323): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(525): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(525): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(525): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(888): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(888): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(888): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(953): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(953): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(953): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(954): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(954): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(954): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(960): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(960): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(960): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(961): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(961): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(961): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(993): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(993): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(993): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(998): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(998): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(998): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1186): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1186): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1186): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1399): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1399): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1399): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1504): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1504): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1504): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1525): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1525): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1525): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1538): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1538): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1538): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1543): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1543): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1543): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1545): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1545): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1545): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files\microsoft sdks\kinect\v1.8\inc\nuiapi.h(46): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1605): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1605): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1606): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1606): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1612): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1612): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1613): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1613): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1619): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1619): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1620): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1620): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1636): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1636): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1636): error C2370: 'HRESULT': nueva definición; clase de almacenamiento distinta
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1620): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1654): error C2059: error de sintaxis: '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1655): error C2059: error de sintaxis: '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1721): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1721): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\wincrypt.h(16645): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\wincrypt.h(16645): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\wincrypt.h(16645): error C2086: 'int HRESULT': nueva definición
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1721): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\wincrypt.h(16655): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3497): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3497): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3497): error C2086: 'int HRESULT': nueva definición
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1721): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3504): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3506): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3506): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3506): error C2086: 'int HRESULT': nueva definición
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1721): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3513): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3526): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3526): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3526): error C2086: 'int HRESULT': nueva definición
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1721): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3536): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3538): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3538): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3538): error C2086: 'int HRESULT': nueva definición
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1721): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3548): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3578): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3578): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3578): error C2086: 'int HRESULT': nueva definición
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1721): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3585): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3587): error C2143: error de sintaxis: falta ';' delante de '__stdcall'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3587): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3587): error C2086: 'int HRESULT': nueva definición
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\shellapi.h(1721): note: vea la declaración de 'HRESULT'
+c:\program files (x86)\windows kits\10\include\10.0.15063.0\um\winspool.h(3587): fatal error C1003: el recuento de errores supera 100; se detiene la compilación

@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{7DADFC53-C745-432A-BDFB-21130F047DC3}</ProjectGuid>
     <RootNamespace>serial</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -70,8 +70,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(KINECTSDK10_DIR)inc;$(IncludePath);</IncludePath>
-    <LibraryPath>$(KINECTSDK10_DIR)lib\x86;$(WindowsSdkDir)lib;$(LibraryPath);$(KINECT_TOOLKIT_DIR)lib\x86</LibraryPath>
+    <IncludePath>libs;$(KINECTSDK10_DIR)inc;$(IncludePath)</IncludePath>
+    <LibraryPath>libs;$(KINECTSDK10_DIR)lib\x86;$(WindowsSdkDir)lib;$(LibraryPath);$(KINECT_TOOLKIT_DIR)lib\x86</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -81,7 +81,9 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>Kinect10.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Kinect10.lib;sqlite3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <EntryPointSymbol>
+      </EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -118,11 +120,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Joints.cpp" />
+    <ClCompile Include="..\..\..\..\Visual Studio 2017\Projects\test\test\DBhandle.cpp" />
+    <ClCompile Include="..\..\..\..\Visual Studio 2017\Projects\test\test\Utils.cpp" />
+    <ClCompile Include="Connect2Kinect.cpp" />
+    <ClCompile Include="taolu.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Visual Studio 2017\Projects\test\test\DBhandle.h" />
+    <ClInclude Include="..\..\..\..\Visual Studio 2017\Projects\test\test\Utils.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="Joints.h" />
+    <ClInclude Include="Connect2Kinect.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
