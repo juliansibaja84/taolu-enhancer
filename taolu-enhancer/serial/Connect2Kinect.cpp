@@ -1,19 +1,10 @@
 //------------------------------------------------------------------------------
-// Proyecto Final PDI
+// Proyecto Final
 // Autores: 
 // Karolay Ardila Salazar
 // Julián Sibaja García
-// Andrés Simancas Mateus
 //------------------------------------------------------------------------------
-#include "stdafx.h"
 #include "Connect2Kinect.h"
-#include "resource.h"
-#include <strsafe.h>
-#include <stdint.h>
-#include <string>
-#include <sstream>
-#include <iostream>
-
 
 int Connect2Kinect::Initialize()
 {
@@ -72,93 +63,75 @@ int Connect2Kinect::Initialize()
 	return 0;
 };
 
-void Connect2Kinect::Update(int data_type)
+std::string Connect2Kinect::getData(void)
 {
 	if (NULL == m_pNuiSensor)
 	{
-		return;
+		return "";
 	}
-
-	// Access to ProcessData method
-	if (WAIT_OBJECT_0 == WaitForSingleObject(m_hNextSkeletonEvent, 0))
-	{
-		if (data_type == JOINTS_CODE) {
-			ProcessData();
-		}
-		else {
-			getDataRGB(Connect2Kinect::p_data);
-			char dummy[3 * width * height];
-
-			// Pointer to the first element of array
-			char * ini_ptr = &dummy[0];
-
-			// Expand array
-			int j;
-			//for (int i = 0; i < height; ++i) {
-			j = 0;
-			for (int k = 0; k < 4 * width * height; k = k + 4) {
-				// r,g,b,a,r,g,b,a,...
-				dummy[j] = Connect2Kinect::p_data[k];
-				dummy[j + 1] = Connect2Kinect::p_data[k + 1];
-				dummy[j + 2] = Connect2Kinect::p_data[k + 2];
-				j = j + 3;
+	else {
+		// Access to ProcessData method
+		if (WAIT_OBJECT_0 == WaitForSingleObject(m_hNextSkeletonEvent, 0))
+		{
+			// Create the frame
+			NUI_SKELETON_FRAME skeletonFrame = { 0 };
+			HRESULT hr = m_pNuiSensor->NuiSkeletonGetNextFrame(0, &skeletonFrame);
+			if (FAILED(hr)) {
+				return "";
 			}
-			fwrite(ini_ptr, sizeof(char), 3 * width * height, stdout);
-			fflush(stdout);
-			std::cout << std::endl;
-			//}
-			// [¡] Send to python here [!]
+
+			// Smooth the obtained skeleton data
+			m_pNuiSensor->NuiTransformSmooth(&skeletonFrame, NULL);
+
+			getJoints(&skeletonFrame);
+			//string Saludo("Successful, we have data\n");
+			//std::cout << Saludo;
+
 		}
+		return Connect2Kinect::datos;
 	}
 }
 
-void Connect2Kinect::ProcessData(void)
-{
-	// Create the frame
-	NUI_SKELETON_FRAME skeletonFrame = { 0 };
-	HRESULT hr = m_pNuiSensor->NuiSkeletonGetNextFrame(0, &skeletonFrame);
-	if (FAILED(hr)) {
-		return;
-	}
-
-	// Smooth the obtained skeleton data
-	m_pNuiSensor->NuiTransformSmooth(&skeletonFrame, NULL);
-
-	getData(&skeletonFrame);
-
-	//string Saludo("Successful, we have data\n");
-	//std::cout << Saludo;
-}
-
-void Connect2Kinect::getData(NUI_SKELETON_FRAME* sframe)
+void Connect2Kinect::getJoints(NUI_SKELETON_FRAME* sframe)
 {
 	int drop_frame;
+	Connect2Kinect::datos = "";
 	for (int i = 0; i < NUI_SKELETON_COUNT; ++i) {
-		const NUI_SKELETON_DATA &skeleton = sframe->SkeletonData[i];
+		//std::cout << "nuevo: "<<i<<" ----------------------------\n";
 
+		const NUI_SKELETON_DATA &skeleton = sframe->SkeletonData[i];
+		std::string joints;
 		// Extract skeleton joints
 		drop_frame = 0;
 		for (int k = 0; k < 20; ++k) {
 			Connect2Kinect::x = skeleton.SkeletonPositions[index_joint[k]].x;
 			Connect2Kinect::y = skeleton.SkeletonPositions[index_joint[k]].y;
 			Connect2Kinect::z = skeleton.SkeletonPositions[index_joint[k]].z;
-
+			std::ostringstream oss;
 			if (Connect2Kinect::x != 0 && Connect2Kinect::y != 0 && Connect2Kinect::z != 0) {
-				std::ostringstream oss;
-				oss << Connect2Kinect::x << "," << Connect2Kinect::y << "," << Connect2Kinect::z << ";";
-				Connect2Kinect::datos = oss.str() + Connect2Kinect::datos;
+
+				if (k == 19) {
+					
+					oss << "'" << Connect2Kinect::x << "," << Connect2Kinect::y << "," << Connect2Kinect::z << "'";
+					
+				}
+				else {
+					oss << "'" << Connect2Kinect::x << "," << Connect2Kinect::y << "," << Connect2Kinect::z << "',";
+					
+				}
+				joints = joints + oss.str();
+				
 			}
 			else {
 				drop_frame = 1;
 				break;
 			}
 		}
-		//printf(Connect2Kinect::datos);
-		if (drop_frame == 0 && !Connect2Kinect::datos.empty()) {
-			std::cout << Connect2Kinect::datos << "\n";
+		if (joints != "") {
+			Connect2Kinect::datos = joints;
 		}
-		Connect2Kinect::datos = "";
 	}
+
 }
 
 int Connect2Kinect::getDataRGB(char *pdata) {

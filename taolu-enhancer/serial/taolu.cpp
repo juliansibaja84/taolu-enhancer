@@ -1,38 +1,23 @@
 #include "Connect2Kinect.h"
 #include <iostream>
+#include "DBhandle.h"
 #include <string>
 
 int main(int argc, char* argv[]) {
-	int py_message = STANDBY_CODE;
 	Connect2Kinect cc;
-	int ini = cc.Initialize();
-
-	if (ini == 1) {
-		std::string Fail1("No se ha encontrado kinect");
-		std::cout << Fail1;
-	}
-	else if (ini == 2) {
-		std::string Fail("No se encuentra disponible Kinect");
-		std::cout << Fail;
-	}
-	else if (ini == 0) {
-		std::string Saludo("Conexion exitosa\n");
-		std::cout << Saludo;
-
-
-		while (1) {
-			if (py_message == STANDBY_CODE) {
-				// :v pos no hago nada
-			}
-			else if (py_message == JOINTS_CODE) {
-				cc.Update(JOINTS_CODE);
-			}
-			else if (py_message == RGB_CODE) {
-				cc.Update(RGB_CODE);
-			}
-			if (py_message == JOINTS_CODE) { py_message = RGB_CODE; }
-			else if (py_message == RGB_CODE) { py_message = JOINTS_CODE; }
+	DBhandle dbh;
+	cc.Initialize();
+	std::string joints;
+	std::cout << "hola" << std::endl;
+	while (1) {
+		joints = cc.getData();
+		if (joints != "") {
+			std::cout << joints.c_str() << "\n";
+			dbh.saveJoints("'move1',"+ joints);
+			dbh.convertJoints2Angles();
 		}
 	}
+
+	system("pause");
 	return 0;
 }

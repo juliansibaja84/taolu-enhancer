@@ -1,16 +1,15 @@
-#pragma once
+#include <string>
+#include <strsafe.h>
+#include <stdint.h>
+#include <string>
+#include <sstream>
+#include <iostream>
 #include "resource.h"
 #include "stdafx.h"
 #include "NuiApi.h"
-#include <string>
 
 #ifndef Connect2Kinect_H
 #define Connect2Kinect_H
-
-#pragma once
-#define STANDBY_CODE 0
-#define JOINTS_CODE 1
-#define RGB_CODE 2
 
 #define width 640
 #define height 480
@@ -29,13 +28,10 @@ class Connect2Kinect {
 	HANDLE m_hNextSkeletonEvent;
 public:
 	int Initialize(void);
-	void Update(int);
-	void ProcessData(void);
-	void getData(NUI_SKELETON_FRAME* pf);
+	std::string getData(void);
+	void getJoints(NUI_SKELETON_FRAME* pf);
 	int getDataRGB(char* pdata);
-
 	HANDLE rgbStream;
-	char p_data[width*height * 4];
 
 	int index_joint[20] = {
 		NUI_SKELETON_POSITION_HIP_CENTER,
