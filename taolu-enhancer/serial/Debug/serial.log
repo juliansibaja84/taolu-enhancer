@@ -1,50 +1,9 @@
-﻿  Utils.cpp
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\utils.cpp(31): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
-  taolu.cpp
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(187): error C2143: error de sintaxis: falta ')' delante de 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(187): error C2143: error de sintaxis: falta ';' delante de 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(187): error C2059: error de sintaxis: 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(187): error C2059: error de sintaxis: ')'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(2683): error C2143: error de sintaxis: falta ')' delante de 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(2683): error C2143: error de sintaxis: falta ';' delante de 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(2683): error C2059: error de sintaxis: 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(2683): error C2059: error de sintaxis: ')'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(4052): error C2143: error de sintaxis: falta ')' delante de 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(4052): error C2143: error de sintaxis: falta ';' delante de 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(4052): error C2059: error de sintaxis: 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(4052): error C2059: error de sintaxis: ')'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(4053): error C2143: error de sintaxis: falta ')' delante de 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(4053): error C2143: error de sintaxis: falta ';' delante de 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(4053): error C2059: error de sintaxis: 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(4053): error C2059: error de sintaxis: ')'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(4967): error C2143: error de sintaxis: falta ')' delante de 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(4967): error C2143: error de sintaxis: falta ';' delante de 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(4967): error C2059: error de sintaxis: 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(4967): error C2059: error de sintaxis: ')'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(4968): error C2143: error de sintaxis: falta ')' delante de 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(4968): error C2143: error de sintaxis: falta ';' delante de 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(4968): error C2059: error de sintaxis: 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(4968): error C2059: error de sintaxis: ')'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(5766): error C2143: error de sintaxis: falta ')' delante de 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(5766): error C2143: error de sintaxis: falta ';' delante de 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(5766): error C2059: error de sintaxis: 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(5766): error C2059: error de sintaxis: ')'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(5777): error C2143: error de sintaxis: falta ')' delante de 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(5777): error C2143: error de sintaxis: falta ';' delante de 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(5777): error C2059: error de sintaxis: 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(5777): error C2059: error de sintaxis: ')'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(6540): error C2143: error de sintaxis: falta ')' delante de 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(6540): error C2143: error de sintaxis: falta ';' delante de 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(6540): error C2059: error de sintaxis: 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(6540): error C2059: error de sintaxis: ')'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(8039): error C2143: error de sintaxis: falta ')' delante de 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(8039): error C2143: error de sintaxis: falta ';' delante de 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(8039): error C2059: error de sintaxis: 'constante'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\libs\sqlite3.h(8039): error C2059: error de sintaxis: ')'
-  DBhandle.cpp
+﻿  DBhandle.cpp
 c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\dbhandle.cpp(37): warning C4101: 'i': variable local sin referencia
 c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\dbhandle.cpp(332): warning C4018: '<': no coinciden signed/unsigned
-  Connect2Kinect.cpp
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\connect2kinect.cpp(151): warning C4305: '=': truncamiento de 'int' a 'char'
-c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\connect2kinect.cpp(151): warning C4309: '=': truncamiento de valor constante
   Generando código...
+  Compilando...
+  taolu.cpp
+  Generando código...
+  serial.vcxproj -> C:\Users\user\Documents\Git\taolu-enhancer-pf\taolu-enhancer\Debug\serial.exe
+  serial.vcxproj -> C:\Users\user\Documents\Git\taolu-enhancer-pf\taolu-enhancer\Debug\serial.pdb (Partial PDB)
