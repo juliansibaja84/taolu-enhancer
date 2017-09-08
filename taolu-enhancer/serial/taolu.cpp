@@ -2,13 +2,8 @@
 #include <iostream>
 #include <string>
 
-#define STANDBY_CODE 0
-#define JOINTS_CODE 1
-#define RGB_CODE 2
-
-int py_message = RGB_CODE;
-
 int main(int argc, char* argv[]) {
+	int py_message = STANDBY_CODE;
 	Connect2Kinect cc;
 	int ini = cc.Initialize();
 
@@ -39,6 +34,5 @@ int main(int argc, char* argv[]) {
 			else if (py_message == RGB_CODE) { py_message = JOINTS_CODE; }
 		}
 	}
-
 	return 0;
 }
