@@ -13,8 +13,7 @@ int main(int argc, char* argv[]) {
 		joints = cc.getData();
 		if (joints != "") {
 			std::cout << joints.c_str() << "\n";
-			dbh.saveJoints("'move1',"+ joints);
-			dbh.convertJoints2Angles();
+			dbh.saveJoints("'move2',"+ joints);
 		}
 	}
 

@@ -1,9 +1,12 @@
-﻿  DBhandle.cpp
+﻿  Utils.cpp
+c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\utils.cpp(31): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+  taolu.cpp
+  DBhandle.cpp
 c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\dbhandle.cpp(37): warning C4101: 'i': variable local sin referencia
 c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\dbhandle.cpp(332): warning C4018: '<': no coinciden signed/unsigned
-  Generando código...
-  Compilando...
-  taolu.cpp
+  Connect2Kinect.cpp
+c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\connect2kinect.cpp(151): warning C4305: '=': truncamiento de 'int' a 'char'
+c:\users\user\documents\git\taolu-enhancer-pf\taolu-enhancer\serial\connect2kinect.cpp(151): warning C4309: '=': truncamiento de valor constante
   Generando código...
   serial.vcxproj -> C:\Users\user\Documents\Git\taolu-enhancer-pf\taolu-enhancer\Debug\serial.exe
   serial.vcxproj -> C:\Users\user\Documents\Git\taolu-enhancer-pf\taolu-enhancer\Debug\serial.pdb (Partial PDB)

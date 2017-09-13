@@ -143,18 +143,10 @@ int Connect2Kinect::getDataRGB(char *pdata) {
 	// Check if if not empty, if its not the save data into "data"
 	if (LockedRect.Pitch != 0)
 	{
-		BYTE* curr = (BYTE*)LockedRect.pBits;
-		BYTE* dataEnd = curr + (width*height) * 4;
-
-		for (int i = 0; i < width*height * 4; ++i) {
-			if (((int)*curr) > 216 && ((int)*curr) < 222) {
-				pdata[i] = '0' + 255;
-			}
-			else {
-				pdata[i] = '0' + (((int)*curr));
-			}
-			++curr;
-		}
+		BYTE* curr = (BYTE*)LockedRect.pBits;	 // Esto de aquí es el puntero hacia la esquína izquierda superior de la imágen
+		// (int)*curr accedes a el valor al que apunta el cursor
+		// el tamaño total es (width*height)*4 , se ve así las posiciones de memoria R,G,B,A,R,G,B,A...
+		//
 	}
 	texture->UnlockRect(0);
 	m_pNuiSensor->NuiImageStreamReleaseFrame(Connect2Kinect::rgbStream, &imageFrame);
