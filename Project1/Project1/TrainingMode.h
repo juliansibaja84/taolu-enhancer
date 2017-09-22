@@ -1,28 +1,32 @@
 #pragma once
+#include "DBhandle.h"
+#include "Connect2Kinect.h"
 
 namespace Project1 {
-
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-
 	/// <summary>
 	/// Resumen de TrainingMode
 	/// </summary>
+	
+	
 	public ref class TrainingMode : public System::Windows::Forms::Form
 	{
 	public:
-		TrainingMode(void)
+		TrainingMode()
 		{
 			InitializeComponent();
 			//
 			//TODO: agregar código de constructor aquí
 			//
 		}
-
+		
+		System::String^ currentform;
+		System::String^ currentpos;
 	protected:
 		/// <summary>
 		/// Limpiar los recursos que se estén usando.
@@ -504,16 +508,22 @@ private: System::Void comboBox1_SelectedIndexChanged(System::Object^  sender, Sy
 	
 }
 private: System::Void form1_Click(System::Object^  sender, System::EventArgs^  e) {
+	currentform = "form1";
 	panel2->Visible = true;
 	panel1->Visible = false;
+	// form = "Strike the hearth with fist";
 }
 private: System::Void form2_Click(System::Object^  sender, System::EventArgs^  e) {
+	currentform = "form2";
 	panel2->Visible = true;
 	panel1->Visible = false;
+	// form = "Arhat holds sea";
 }
 private: System::Void form3_Click(System::Object^  sender, System::EventArgs^  e) {
+	currentform = "form3";
 	panel2->Visible = true;
 	panel1->Visible = false;
+	// form = "Brush hand and fist in bow stance";
 }
 private: System::Void home_Click(System::Object^  sender, System::EventArgs^  e) {
 	panel1->Visible = true;
@@ -525,21 +535,63 @@ private: System::Void back_Click_1(System::Object^  sender, System::EventArgs^  
 	panel1->Visible = true;
 }
 private: System::Void initialpos_Click(System::Object^  sender, System::EventArgs^  e) {
+	if (currentform == "form1") {
+		currentpos = "Horse-with-separate-palms";
+		
+	}
+	else if (currentform == "form2") {
+		currentpos = "crouch-on-the-ground";
+	}
+	else if (currentform == "form3") {
+		currentpos = "hit-with-elbows";
+	}
+	else {
+		currentpos = "";
+	}
 	panel3->Visible = true;
 	panel1->Visible = false;
 	panel2->Visible = false;
 }
 private: System::Void centralpos_Click(System::Object^  sender, System::EventArgs^  e) {
+	if (currentform == "form1") {
+		currentpos = "Bow-with-grip";
+	}
+	else if (currentform == "form2") {
+		currentpos = "Hands-illusion";
+	}
+	else if (currentform == "form3") {
+		currentpos = "Rush-hand";
+	}
+	else {
+		currentpos = "";
+	}
 	panel3->Visible = true;
 	panel1->Visible = false;
 	panel2->Visible = false;
 }
 private: System::Void finalpos_Click(System::Object^  sender, System::EventArgs^  e) {
+	if (currentform == "form1") {
+		currentpos = "Heart-strike";
+	}
+	else if (currentform == "form2") {
+		currentpos = "hit-with-elbows";
+	}
+	else if (currentform == "form3") {
+		currentpos = "thrust-fist";
+	}
+	else {
+		currentpos = "";
+	}
 	panel3->Visible = true;
 	panel1->Visible = false;
 	panel2->Visible = false;
 }
 private: System::Void panel3_Paint(System::Object^  sender, System::Windows::Forms::PaintEventArgs^  e) {
+}
+public: System::Void getImageFromKinect(void) {
+	BYTE RGBADATA[640*480*4];
+	const char * data;
+	///data = Connect2Kinect::getPInstance().getData();
 }
 };
 }

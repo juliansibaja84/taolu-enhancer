@@ -202,8 +202,9 @@ int DBhandle::execute(std::string sqls) {
 	return 0;
 }
 
-int DBhandle::saveJoints(std::string data) {
+int DBhandle::saveJoints(const char * data) {
 	sqlite3 *db;
+	std::string dbdata = data;
 	char *zErrMsg = 0;
 	int rc;
 	std::string sqls;
@@ -256,7 +257,7 @@ int DBhandle::saveJoints(std::string data) {
 		"HEAD,SHOULDER_LEFT,ELBOW_LEFT,WRIST_LEFT,HAND_LEFT,SHOULDER_RIGHT,"\
 		"ELBOW_RIGHT,WRIST_RIGHT,HAND_RIGHT,HIP_LEFT,KNEE_LEFT,ANKLE_LEFT,"\
 		"FOOT_LEFT,HIP_RIGHT,KNEE_RIGHT,ANKLE_RIGHT,FOOT_RIGHT) "\
-		"VALUES (NULL," + data + "); ";
+		"VALUES (NULL," + dbdata + "); ";
 
 	rc = sqlite3_exec(db, sqls.c_str(), CB_doNothing, 0, &zErrMsg);
 

@@ -36,7 +36,8 @@ int Connect2Kinect::Initialize()
 		// If this line is reached the sensor was not ok, so release it
 		pNuiSensor->Release();
 	}
-
+	//cli::pin_ptr <HANDLE> ptr = &(Connect2Kinect::rgbStream);
+	//static_cast<HANDLE *>(ptr)
 	if (NULL != m_pNuiSensor) {
 		// Initialize the Kinect and use it for skeleton and RGB image
 		hr = m_pNuiSensor->NuiInitialize(NUI_INITIALIZE_FLAG_USES_SKELETON | NUI_INITIALIZE_FLAG_USES_COLOR);
@@ -63,11 +64,11 @@ int Connect2Kinect::Initialize()
 	return 0;
 };
 
-std::string Connect2Kinect::getData(void)
+const char * Connect2Kinect::getData(void)
 {
 	if (NULL == m_pNuiSensor)
 	{
-		return "";
+		return Connect2Kinect::datos;
 	}
 	else {
 		// Access to ProcessData method
@@ -77,7 +78,7 @@ std::string Connect2Kinect::getData(void)
 			NUI_SKELETON_FRAME skeletonFrame = { 0 };
 			HRESULT hr = m_pNuiSensor->NuiSkeletonGetNextFrame(0, &skeletonFrame);
 			if (FAILED(hr)) {
-				return "";
+				return Connect2Kinect::datos;
 			}
 
 			// Smooth the obtained skeleton data
@@ -103,6 +104,28 @@ void Connect2Kinect::getJoints(NUI_SKELETON_FRAME* sframe)
 		std::string joints;
 		// Extract skeleton joints
 		drop_frame = 0;
+		int index_joint[20] = {
+			NUI_SKELETON_POSITION_HIP_CENTER,
+			NUI_SKELETON_POSITION_SPINE,
+			NUI_SKELETON_POSITION_SHOULDER_CENTER,
+			NUI_SKELETON_POSITION_HEAD,
+			NUI_SKELETON_POSITION_SHOULDER_LEFT,
+			NUI_SKELETON_POSITION_ELBOW_LEFT,
+			NUI_SKELETON_POSITION_WRIST_LEFT,
+			NUI_SKELETON_POSITION_HAND_LEFT,
+			NUI_SKELETON_POSITION_SHOULDER_RIGHT,
+			NUI_SKELETON_POSITION_ELBOW_RIGHT,
+			NUI_SKELETON_POSITION_WRIST_RIGHT,
+			NUI_SKELETON_POSITION_HAND_RIGHT,
+			NUI_SKELETON_POSITION_HIP_LEFT,
+			NUI_SKELETON_POSITION_KNEE_LEFT,
+			NUI_SKELETON_POSITION_ANKLE_LEFT,
+			NUI_SKELETON_POSITION_FOOT_LEFT,
+			NUI_SKELETON_POSITION_HIP_RIGHT,
+			NUI_SKELETON_POSITION_KNEE_RIGHT,
+			NUI_SKELETON_POSITION_ANKLE_RIGHT,
+			NUI_SKELETON_POSITION_FOOT_RIGHT
+		};
 		for (int k = 0; k < 20; ++k) {
 			Connect2Kinect::x = skeleton.SkeletonPositions[index_joint[k]].x;
 			Connect2Kinect::y = skeleton.SkeletonPositions[index_joint[k]].y;
@@ -120,7 +143,6 @@ void Connect2Kinect::getJoints(NUI_SKELETON_FRAME* sframe)
 					
 				}
 				joints = joints + oss.str();
-				
 			}
 			else {
 				drop_frame = 1;
@@ -128,34 +150,35 @@ void Connect2Kinect::getJoints(NUI_SKELETON_FRAME* sframe)
 			}
 		}
 		if (joints != "") {
-			Connect2Kinect::datos = joints;
+			Connect2Kinect::datos = joints.c_str();
 		}
 	}
 
 }
 
-BYTE* Connect2Kinect::getDataRGB() {
+int Connect2Kinect::getDataRGB(BYTE * RGBADATA) {
 	NUI_IMAGE_FRAME imageFrame;
 	NUI_LOCKED_RECT LockedRect; // Pointer to the data
-	if (m_pNuiSensor->NuiImageStreamGetNextFrame(Connect2Kinect::rgbStream, 0, &imageFrame) < 0) return NULL;
+	if (m_pNuiSensor->NuiImageStreamGetNextFrame(Connect2Kinect::rgbStream, 0, &imageFrame) < 0) return 0;
 	INuiFrameTexture* texture = imageFrame.pFrameTexture;
+
 	texture->LockRect(0, &LockedRect, NULL, 0);
-	// Check if if not empty, if its not the save data into "data"
+	// Check if not empty, if its not the save data into "data"
 	if (LockedRect.Pitch != 0)
 	{
-		BYTE* curr = (BYTE*)LockedRect.pBits;	 // Esto de aquí es el puntero hacia la esquína izquierda superior de la imágen
-		// (int)*curr accedes a el valor al que apunta el cursor
-		// el tamaño total es (width*height)*4 , se ve así las posiciones de memoria R,G,B,A,R,G,B,A...
+		BYTE* prgba = (BYTE*)LockedRect.pBits;	// Esto de aquí es el puntero hacia la esquína izquierda superior de la imágen
+												// (int)*curr accedes a el valor al que apunta el cursor
+												// el tamaño total es (width*height)*4 , se ve así las posiciones de memoria R,G,B,A,R,G,B,A...
 		INT32 size_stream = width*height * 4;
+		for (int i = 0; i < size_stream; i++) {
+			*(RGBADATA + i) = *(prgba + i);
+		}
 		texture->UnlockRect(0);
 		m_pNuiSensor->NuiImageStreamReleaseFrame(Connect2Kinect::rgbStream, &imageFrame);
-		return curr;
-		
+		return 1;
 	}
-	else {
-		texture->UnlockRect(0);
-		m_pNuiSensor->NuiImageStreamReleaseFrame(Connect2Kinect::rgbStream, &imageFrame);
-		return NULL;
-	}
+	texture->UnlockRect(0);
+	m_pNuiSensor->NuiImageStreamReleaseFrame(Connect2Kinect::rgbStream, &imageFrame);
+	return 0;
 	
 }

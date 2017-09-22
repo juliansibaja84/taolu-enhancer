@@ -12,7 +12,7 @@ class DBhandle {
 		int execute(std::string sqls);
 		int showAllInTable(std::string tname);
 		int deleteTableContent(std::string tname);
-		int saveJoints(std::string data); //data is a string with the form "'move','joint0','joint1',...,'joint19'"
+		int saveJoints(const char * data); //data is a string with the form "'move','joint0','joint1',...,'joint19'"
 		int saveAngles(std::string data); //data is a string with the form "'move',angle1,angle2,...angle13"
 		int convertJoints2Angles();
 };

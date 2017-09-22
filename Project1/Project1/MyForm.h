@@ -1,9 +1,9 @@
 #pragma once
 #include "TrainingMode.h"
 #include "TestMode.h"
+#include "Connect2Kinect.h"
 
 namespace Project1 {
-
 	using namespace System;
 	using namespace System::IO;
 	using namespace System::ComponentModel;
@@ -11,6 +11,7 @@ namespace Project1 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	
 	/// <summary>
 	/// Resumen de MyForm
 	/// </summary>
@@ -18,15 +19,20 @@ namespace Project1 {
 	{
 	public:
 		
-		MyForm(void)
+		MyForm()
 		{
 			InitializeComponent();
 			//
 			//TODO: agregar código de constructor aquí
 			//
+			
 		}
-
+		TestMode^ testm;
+		int train_mode = 0;
+		int test_mode = 0;
+		TrainingMode^ trainingm;
 	protected:
+
 		/// <summary>
 		/// Limpiar los recursos que se estén usando.
 		/// </summary>
@@ -45,13 +51,7 @@ namespace Project1 {
 
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Label^  label3;
-
-	private: System::Windows::Forms::PictureBox^  pictureBox1;
-
-
-
-
-
+	private: System::Windows::Forms::PictureBox^  test;
 
 	private:
 		/// <summary>
@@ -68,11 +68,11 @@ namespace Project1 {
 		{
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(MyForm::typeid));
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->test = (gcnew System::Windows::Forms::PictureBox());
 			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->test))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -91,19 +91,19 @@ namespace Project1 {
 			this->label1->Text = L"Login Mode";
 			this->label1->Click += gcnew System::EventHandler(this, &MyForm::label1_Click);
 			// 
-			// pictureBox1
+			// test
 			// 
-			this->pictureBox1->BackColor = System::Drawing::Color::Transparent;
-			this->pictureBox1->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(196, 137);
-			this->pictureBox1->Margin = System::Windows::Forms::Padding(4);
-			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(77, 77);
-			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
-			this->pictureBox1->TabIndex = 2;
-			this->pictureBox1->TabStop = false;
-			this->pictureBox1->Click += gcnew System::EventHandler(this, &MyForm::pictureBox1_Click);
+			this->test->BackColor = System::Drawing::Color::Transparent;
+			this->test->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->test->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"test.Image")));
+			this->test->Location = System::Drawing::Point(196, 137);
+			this->test->Margin = System::Windows::Forms::Padding(4);
+			this->test->Name = L"test";
+			this->test->Size = System::Drawing::Size(77, 77);
+			this->test->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
+			this->test->TabIndex = 2;
+			this->test->TabStop = false;
+			this->test->Click += gcnew System::EventHandler(this, &MyForm::pictureBox1_Click);
 			// 
 			// pictureBox2
 			// 
@@ -161,7 +161,7 @@ namespace Project1 {
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->pictureBox2);
-			this->Controls->Add(this->pictureBox1);
+			this->Controls->Add(this->test);
 			this->Controls->Add(this->label1);
 			this->Cursor = System::Windows::Forms::Cursors::Default;
 			this->DoubleBuffered = true;
@@ -174,7 +174,7 @@ namespace Project1 {
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Inicio";
 			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->test))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -182,15 +182,26 @@ namespace Project1 {
 		}
 #pragma endregion
 	private: System::Void pictureBox1_Click(System::Object^  sender, System::EventArgs^  e) { // Test Mode
+		test_mode = 1;
+		testm = gcnew TestMode();
 		MyForm().Visible = false;
-		TestMode().ShowDialog();
+		(*testm).ShowDialog();
+		
 	}
 	private: System::Void pictureBox2_Click_1(System::Object^  sender, System::EventArgs^  e) { // Training Mode
+		train_mode = 1;
+		trainingm = gcnew TrainingMode();
 		MyForm().Visible = false;
-		TrainingMode().ShowDialog();
+		(*trainingm).ShowDialog();
 	}
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
 	}
+public: System::Void manageVideo() {
+	/*
+	if(train_mode)
+		(*trainingm).getImageFromKinect();
+	// testm.*/
+}
 private: System::Void label2_Click(System::Object^  sender, System::EventArgs^  e) {
 }
 private: System::Void domainUpDown1_SelectedItemChanged(System::Object^  sender, System::EventArgs^  e) {

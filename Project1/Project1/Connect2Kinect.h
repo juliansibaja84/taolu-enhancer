@@ -7,6 +7,7 @@
 #include "resource.h"
 #include "stdafx.h"
 #include "NuiApi.h"
+#include "Utils.h"
 
 #ifndef Connect2Kinect_H
 #define Connect2Kinect_H
@@ -21,43 +22,32 @@
 #define N height*width * 3 * 2
 
 class Connect2Kinect {
+
+private:
+	Connect2Kinect() {};
 	// Current Kinect
 	INuiSensor * m_pNuiSensor;
 	// Handles
 	HANDLE m_pSkeletonStreamHandle;
 	HANDLE m_hNextSkeletonEvent;
-public:
-	int Initialize(void);
-	std::string getData(void);
-	void getJoints(NUI_SKELETON_FRAME* pf);
-	BYTE* getDataRGB();
 	HANDLE rgbStream;
 
-	int index_joint[20] = {
-		NUI_SKELETON_POSITION_HIP_CENTER,
-		NUI_SKELETON_POSITION_SPINE,
-		NUI_SKELETON_POSITION_SHOULDER_CENTER,
-		NUI_SKELETON_POSITION_HEAD,
-		NUI_SKELETON_POSITION_SHOULDER_LEFT,
-		NUI_SKELETON_POSITION_ELBOW_LEFT,
-		NUI_SKELETON_POSITION_WRIST_LEFT,
-		NUI_SKELETON_POSITION_HAND_LEFT,
-		NUI_SKELETON_POSITION_SHOULDER_RIGHT,
-		NUI_SKELETON_POSITION_ELBOW_RIGHT,
-		NUI_SKELETON_POSITION_WRIST_RIGHT,
-		NUI_SKELETON_POSITION_HAND_RIGHT,
-		NUI_SKELETON_POSITION_HIP_LEFT,
-		NUI_SKELETON_POSITION_KNEE_LEFT,
-		NUI_SKELETON_POSITION_ANKLE_LEFT,
-		NUI_SKELETON_POSITION_FOOT_LEFT,
-		NUI_SKELETON_POSITION_HIP_RIGHT,
-		NUI_SKELETON_POSITION_KNEE_RIGHT,
-		NUI_SKELETON_POSITION_ANKLE_RIGHT,
-		NUI_SKELETON_POSITION_FOOT_RIGHT
-	};
+public:
+	static Connect2Kinect *instance;
+	int Initialize(void);	const char * getData(void);
+	void getJoints(NUI_SKELETON_FRAME* pf);
+	int Connect2Kinect::getDataRGB(BYTE * RGBADATA);
 	float x;
 	float y;
 	float z;
-	std::string datos = "";
+	const char * datos = "";
+
+	static Connect2Kinect getPInstance() {
+		if (!instance) {
+			instance = new Connect2Kinect;
+			(*instance).Initialize();
+		}
+		return *instance;
+	}
 };
 #endif
