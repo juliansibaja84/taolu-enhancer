@@ -1,9 +1,7 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(387,5): warning MSB8028: El directorio intermedio (Debug\) contiene archivos compartidos de otro proyecto (taolu.vcxproj). Esto puede dar lugar a un comportamiento incorrecto de limpieza y recompilación.
+  TrainingMode.cpp
   main.cpp
-c:\users\user\documents\git\taolu-enhancer-pf\project1\project1\TrainingMode.h(593): warning C4101: 'data': variable local sin referencia
-c:\users\user\documents\git\taolu-enhancer-pf\project1\project1\TrainingMode.h(592): warning C4101: 'RGBADATA': variable local sin referencia
-main.cpp(34): error C3071: el operador '%' solamente se puede aplicar a una instancia de una clase ref o a un tipo de valor
-main.cpp(34): error C2665: 'System::Windows::Forms::Application::Run': ninguna de las 3 sobrecargas pudo convertir todos los tipos de argumento
-  main.cpp(34): note: puede ser 'void System::Windows::Forms::Application::Run(System::Windows::Forms::ApplicationContext ^)'
-  main.cpp(34): note: o       'void System::Windows::Forms::Application::Run(System::Windows::Forms::Form ^)'
-  main.cpp(34): note: al hacer coincidir la lista de argumentos '(Project1::MyForm ^*)'
+  Generando código...
+     Creando biblioteca C:\Users\julian\Documents\Git\taolu-enhancer-pf\Project1\Debug\Project1.lib y objeto C:\Users\julian\Documents\Git\taolu-enhancer-pf\Project1\Debug\Project1.exp
+DBhandle.obj : warning LNK4248: sÝmbolo (token) de typeref sin resolver (01000017) para 'sqlite3'; no se puede ejecutar la imagen
+  Project1.vcxproj -> C:\Users\julian\Documents\Git\taolu-enhancer-pf\Project1\Debug\Project1.exe

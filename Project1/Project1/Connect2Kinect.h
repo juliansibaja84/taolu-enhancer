@@ -33,14 +33,15 @@ private:
 	HANDLE rgbStream;
 
 public:
-	static Connect2Kinect *instance;
-	int Initialize(void);	const char * getData(void);
+	static Connect2Kinect * instance;
+	int Initialize(void);
+	std::string getData(void);
 	void getJoints(NUI_SKELETON_FRAME* pf);
 	int Connect2Kinect::getDataRGB(BYTE * RGBADATA);
 	float x;
 	float y;
 	float z;
-	const char * datos = "";
+	std::string datos = "";
 
 	static Connect2Kinect getPInstance() {
 		if (!instance) {

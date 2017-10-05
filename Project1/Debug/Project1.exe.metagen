@@ -22,8 +22,6 @@ Class Project1.TrainingMode: AutoLayout, AnsiClass, Class, Public, BeforeFieldIn
   Fields:
     System.String currentform : Public
     System.String currentpos : Public
-  Methods:
-    getImageFromKinect(): PrivateScope, Public, HideBySig
 Class Project1.TestMode: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName

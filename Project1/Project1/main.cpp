@@ -5,9 +5,9 @@ using namespace System;
 using namespace System::Windows::Forms;
 using namespace System::Threading;
 
-
 Connect2Kinect *Connect2Kinect::instance = 0;
 
+/*
 ref class Work
 {
 public:
@@ -20,6 +20,7 @@ public:
 	}
 
 };
+*/
 
 [STAThread]
 void Main()
@@ -27,13 +28,14 @@ void Main()
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 
-	Work^ w = gcnew Work;
-	
+	//Work^ w = gcnew Work;
+
 
 	Project1::MyForm form;
-	w->Data = &form.manageVideo;
-	Thread^ piThread = gcnew Thread(gcnew ThreadStart(w, &Work::DoMoreWork));
-	(*piThread).Start();
+
+	//w->Data = &form.manageVideo;
+	//Thread^ piThread = gcnew Thread(gcnew ThreadStart(w, &Work::DoMoreWork));
+	//(*piThread).Start();
 
 	Application::Run(%(form));
 }

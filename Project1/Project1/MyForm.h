@@ -197,10 +197,7 @@ namespace Project1 {
 	private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
 	}
 public: System::Void manageVideo() {
-	/*
-	if(train_mode)
-		(*trainingm).getImageFromKinect();
-	// testm.*/
+	while (1) {};
 }
 private: System::Void label2_Click(System::Object^  sender, System::EventArgs^  e) {
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "DBhandle.h"
 #include "Connect2Kinect.h"
+#include <string>
 
 namespace Project1 {
 	using namespace System;
@@ -9,6 +10,7 @@ namespace Project1 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Threading;
 	/// <summary>
 	/// Resumen de TrainingMode
 	/// </summary>
@@ -23,6 +25,7 @@ namespace Project1 {
 			//
 			//TODO: agregar código de constructor aquí
 			//
+			
 		}
 		
 		System::String^ currentform;
@@ -36,6 +39,9 @@ namespace Project1 {
 			if (components)
 			{
 				delete components;
+			}
+			if (this->trd->IsAlive) {
+				trd->Abort();
 			}
 		}
 	private: System::Windows::Forms::Label^  formtitle;
@@ -493,7 +499,7 @@ namespace Project1 {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->initialpos))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
-
+			this->startThread();
 		}
 #pragma endregion
 	private: System::Void TrainingMode_Load(System::Object^  sender, System::EventArgs^  e) {
@@ -582,16 +588,35 @@ private: System::Void finalpos_Click(System::Object^  sender, System::EventArgs^
 	else {
 		currentpos = "";
 	}
+	//this->getImageFromKinect();
 	panel3->Visible = true;
 	panel1->Visible = false;
 	panel2->Visible = false;
 }
 private: System::Void panel3_Paint(System::Object^  sender, System::Windows::Forms::PaintEventArgs^  e) {
 }
-public: System::Void getImageFromKinect(void) {
-	BYTE RGBADATA[640*480*4];
-	const char * data;
-	///data = Connect2Kinect::getPInstance().getData();
+private: void getImageFromKinect() {
+	//BYTE RGBADATA[width* height * 4];
+	String^ x = gcnew String("");
+	while(1){
+		while (x == "") {
+			x = gcnew String((Connect2Kinect::getPInstance().getData()).c_str());
+		}
+		//MessageBox::Show(x);
+		title->Invoke(gcnew Action<String ^>(title,&Label::Text::set),x);
+		Thread::Sleep(1);
+	}
+}
+private: Thread^ trd;
+
+private: void startThread() {
+	
+	ThreadStart^ delegate = gcnew ThreadStart(this, &TrainingMode::getImageFromKinect);
+	trd = gcnew Thread(delegate);
+	(*trd).IsBackground = true;
+	(*trd).Start();
+
 }
 };
 }
+

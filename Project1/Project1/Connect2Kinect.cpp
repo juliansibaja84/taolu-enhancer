@@ -64,7 +64,7 @@ int Connect2Kinect::Initialize()
 	return 0;
 };
 
-const char * Connect2Kinect::getData(void)
+std::string Connect2Kinect::getData(void)
 {
 	if (NULL == m_pNuiSensor)
 	{
@@ -150,7 +150,7 @@ void Connect2Kinect::getJoints(NUI_SKELETON_FRAME* sframe)
 			}
 		}
 		if (joints != "") {
-			Connect2Kinect::datos = joints.c_str();
+			Connect2Kinect::datos = joints;
 		}
 	}
 
@@ -171,7 +171,7 @@ int Connect2Kinect::getDataRGB(BYTE * RGBADATA) {
 												// el tamaño total es (width*height)*4 , se ve así las posiciones de memoria R,G,B,A,R,G,B,A...
 		INT32 size_stream = width*height * 4;
 		for (int i = 0; i < size_stream; i++) {
-			*(RGBADATA + i) = *(prgba + i);
+			*(RGBADATA+i) = *(prgba + i);
 		}
 		texture->UnlockRect(0);
 		m_pNuiSensor->NuiImageStreamReleaseFrame(Connect2Kinect::rgbStream, &imageFrame);

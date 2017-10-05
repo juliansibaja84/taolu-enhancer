@@ -78,6 +78,7 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>libs;$(KINECTSDK10_DIR)inc;$(IncludePath)</IncludePath>
     <LibraryPath>libs;$(KINECTSDK10_DIR)lib\x86;$(WindowsSdkDir)lib;$(LibraryPath);$(KINECT_TOOLKIT_DIR)lib\x86</LibraryPath>
+    <EnableManagedIncrementalBuild>true</EnableManagedIncrementalBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
