@@ -37,12 +37,11 @@ public:
 	int Initialize(void);
 	std::string getData(void);
 	void getJoints(NUI_SKELETON_FRAME* pf);
-	int Connect2Kinect::getDataRGB(BYTE * RGBADATA);
+	int Connect2Kinect::getDataRGB(array<unsigned char>^ RGBADATA, int without_alpha);
 	float x;
 	float y;
 	float z;
 	std::string datos = "";
-
 	static Connect2Kinect getPInstance() {
 		if (!instance) {
 			instance = new Connect2Kinect;

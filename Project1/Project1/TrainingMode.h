@@ -3,6 +3,7 @@
 #include "Connect2Kinect.h"
 #include <string>
 
+const INT32 streamsize = width*height*3;
 namespace Project1 {
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -49,48 +50,26 @@ namespace Project1 {
 
 	private: System::Windows::Forms::Label^  title;
 	private: System::Windows::Forms::PictureBox^  trainingimage;
-
-
-
-
 	private: System::Windows::Forms::Panel^  panel1;
-
-
-
-
-
 	private: System::Windows::Forms::Label^  label5;
 	private: System::Windows::Forms::Label^  label4;
 	private: System::Windows::Forms::Label^  label3;
 	private: System::Windows::Forms::PictureBox^  form3;
-
 	private: System::Windows::Forms::PictureBox^  form2;
-
 	private: System::Windows::Forms::PictureBox^  form1;
-
 	private: System::Windows::Forms::Panel^  panel2;
 	private: System::Windows::Forms::Label^  postitle;
-
-
-
-
-
 	private: System::Windows::Forms::Panel^  panel3;
 	private: System::Windows::Forms::ProgressBar^  progressBar1;
 	private: System::Windows::Forms::PictureBox^  home;
 	private: System::Windows::Forms::Label^  loading;
-
-
 	private: System::Windows::Forms::PictureBox^  newform;
-
 	private: System::Windows::Forms::Label^  label7;
 	private: System::Windows::Forms::Label^  label6;
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::PictureBox^  finalpos;
-
 	private: System::Windows::Forms::PictureBox^  centralpos;
-
 	private: System::Windows::Forms::PictureBox^  initialpos;
 	private: System::Windows::Forms::PictureBox^  back;
 
@@ -595,16 +574,45 @@ private: System::Void finalpos_Click(System::Object^  sender, System::EventArgs^
 }
 private: System::Void panel3_Paint(System::Object^  sender, System::Windows::Forms::PaintEventArgs^  e) {
 }
+
 private: void getImageFromKinect() {
-	//BYTE RGBADATA[width* height * 4];
-	String^ x = gcnew String("");
+	array<unsigned char>^ buffer = gcnew array<unsigned char>(streamsize);
+	//String^ x = gcnew String("");
+	//int y = 0;
+	Bitmap^ bmp = gcnew Bitmap(width, height, System::Drawing::Imaging::PixelFormat::Format24bppRgb);
+	System::Drawing::Rectangle^ rect = gcnew System::Drawing::Rectangle(0, 0, bmp->Width, bmp->Height);
+	
+	int lockimage = 0;
 	while(1){
-		while (x == "") {
-			x = gcnew String((Connect2Kinect::getPInstance().getData()).c_str());
+		//x = gcnew String((Connect2Kinect::getPInstance().getData()).c_str());// esto debe estar aquí porque hay stackoverflow en el getrgbdata
+		lockimage = Connect2Kinect::getPInstance().getDataRGB(buffer,1);
+		if (lockimage == 1) {
+			System::Drawing::Imaging::BitmapData^ bmp_data = bmp->LockBits(*rect, System::Drawing::Imaging::ImageLockMode::WriteOnly, System::Drawing::Imaging::PixelFormat::Format24bppRgb);
+			System::Runtime::InteropServices::Marshal::Copy(buffer, 0, bmp_data->Scan0, streamsize);
+			bmp->UnlockBits(bmp_data);
+		}
+		
+		if (this->trainingimage->IsHandleCreated && lockimage == 1) 
+		{
+			trainingimage->Invoke(gcnew Action<Image ^>(trainingimage, &PictureBox::Image::set), bmp);
+			trainingimage->Invoke(gcnew Action(trainingimage, &PictureBox::Update));
 		}
 		//MessageBox::Show(x);
-		title->Invoke(gcnew Action<String ^>(title,&Label::Text::set),x);
-		Thread::Sleep(1);
+		/*
+		x = gcnew String(System::Convert::ToString(y));
+		if (y == 10) {
+			y = 0;
+		}else{
+			y += 1;
+		}
+		
+		if (this->title->IsHandleCreated) {
+			title->Invoke(gcnew Action<String ^>(title,&Label::Text::set),x);
+			title->Invoke(gcnew Action(title, &Label::Update));
+		}
+		x = "";
+		*/
+		Thread::Sleep(10);
 	}
 }
 private: Thread^ trd;
