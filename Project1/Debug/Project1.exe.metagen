@@ -22,6 +22,7 @@ Class Project1.TrainingMode: AutoLayout, AnsiClass, Class, Public, BeforeFieldIn
   Fields:
     System.String currentform : Public
     System.String currentpos : Public
+    Int32 save_dbdata : Public
 Class Project1.TestMode: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName

@@ -231,6 +231,7 @@ namespace Project1 {
 			this->DoubleBuffered = true;
 			this->Font = (gcnew System::Drawing::Font(L"Showcard Gothic", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(6, 5, 6, 5);
 			this->Name = L"TestMode";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;

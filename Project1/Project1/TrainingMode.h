@@ -2,6 +2,8 @@
 #include "DBhandle.h"
 #include "Connect2Kinect.h"
 #include <string>
+#include <msclr\marshal_cppstd.h>
+#include <math.h>
 
 const INT32 streamsize = width*height*3;
 namespace Project1 {
@@ -26,11 +28,8 @@ namespace Project1 {
 			//
 			//TODO: agregar código de constructor aquí
 			//
-			
+			startThread();
 		}
-		
-		System::String^ currentform;
-		System::String^ currentpos;
 	protected:
 		/// <summary>
 		/// Limpiar los recursos que se estén usando.
@@ -48,7 +47,7 @@ namespace Project1 {
 	private: System::Windows::Forms::Label^  formtitle;
 	protected:
 
-	private: System::Windows::Forms::Label^  title;
+
 	private: System::Windows::Forms::PictureBox^  trainingimage;
 	private: System::Windows::Forms::Panel^  panel1;
 	private: System::Windows::Forms::Label^  label5;
@@ -59,10 +58,10 @@ namespace Project1 {
 	private: System::Windows::Forms::PictureBox^  form1;
 	private: System::Windows::Forms::Panel^  panel2;
 	private: System::Windows::Forms::Label^  postitle;
-	private: System::Windows::Forms::Panel^  panel3;
-	private: System::Windows::Forms::ProgressBar^  progressBar1;
-	private: System::Windows::Forms::PictureBox^  home;
-	private: System::Windows::Forms::Label^  loading;
+
+
+
+
 	private: System::Windows::Forms::PictureBox^  newform;
 	private: System::Windows::Forms::Label^  label7;
 	private: System::Windows::Forms::Label^  label6;
@@ -91,7 +90,6 @@ namespace Project1 {
 		{
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(TrainingMode::typeid));
 			this->formtitle = (gcnew System::Windows::Forms::Label());
-			this->title = (gcnew System::Windows::Forms::Label());
 			this->trainingimage = (gcnew System::Windows::Forms::PictureBox());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->label7 = (gcnew System::Windows::Forms::Label());
@@ -102,10 +100,6 @@ namespace Project1 {
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->panel3 = (gcnew System::Windows::Forms::Panel());
-			this->progressBar1 = (gcnew System::Windows::Forms::ProgressBar());
-			this->home = (gcnew System::Windows::Forms::PictureBox());
-			this->loading = (gcnew System::Windows::Forms::Label());
 			this->panel2 = (gcnew System::Windows::Forms::Panel());
 			this->back = (gcnew System::Windows::Forms::PictureBox());
 			this->label6 = (gcnew System::Windows::Forms::Label());
@@ -121,8 +115,6 @@ namespace Project1 {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->form3))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->form2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->form1))->BeginInit();
-			this->panel3->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->home))->BeginInit();
 			this->panel2->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->back))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->finalpos))->BeginInit();
@@ -140,24 +132,14 @@ namespace Project1 {
 			this->formtitle->TabIndex = 0;
 			this->formtitle->Text = L"Pick a Form!";
 			// 
-			// title
-			// 
-			this->title->AutoSize = true;
-			this->title->Location = System::Drawing::Point(359, 30);
-			this->title->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
-			this->title->Name = L"title";
-			this->title->Size = System::Drawing::Size(136, 20);
-			this->title->TabIndex = 1;
-			this->title->Text = L"TRAINING MODE";
-			// 
 			// trainingimage
 			// 
 			this->trainingimage->BackColor = System::Drawing::Color::Transparent;
 			this->trainingimage->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"trainingimage.Image")));
-			this->trainingimage->Location = System::Drawing::Point(363, 85);
+			this->trainingimage->Location = System::Drawing::Point(251, 9);
 			this->trainingimage->Margin = System::Windows::Forms::Padding(4, 3, 4, 3);
 			this->trainingimage->Name = L"trainingimage";
-			this->trainingimage->Size = System::Drawing::Size(431, 365);
+			this->trainingimage->Size = System::Drawing::Size(640, 480);
 			this->trainingimage->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->trainingimage->TabIndex = 2;
 			this->trainingimage->TabStop = false;
@@ -278,52 +260,6 @@ namespace Project1 {
 			this->label3->TabIndex = 7;
 			this->label3->Text = L"Form 1";
 			// 
-			// panel3
-			// 
-			this->panel3->BackColor = System::Drawing::Color::Transparent;
-			this->panel3->Controls->Add(this->progressBar1);
-			this->panel3->Controls->Add(this->home);
-			this->panel3->Controls->Add(this->loading);
-			this->panel3->Font = (gcnew System::Drawing::Font(L"Showcard Gothic", 9.75F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->panel3->Location = System::Drawing::Point(30, 159);
-			this->panel3->Margin = System::Windows::Forms::Padding(4, 3, 4, 3);
-			this->panel3->Name = L"panel3";
-			this->panel3->Size = System::Drawing::Size(140, 163);
-			this->panel3->TabIndex = 15;
-			this->panel3->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &TrainingMode::panel3_Paint);
-			// 
-			// progressBar1
-			// 
-			this->progressBar1->ForeColor = System::Drawing::Color::Gold;
-			this->progressBar1->Location = System::Drawing::Point(18, 53);
-			this->progressBar1->Name = L"progressBar1";
-			this->progressBar1->Size = System::Drawing::Size(100, 23);
-			this->progressBar1->TabIndex = 9;
-			this->progressBar1->Value = 20;
-			// 
-			// home
-			// 
-			this->home->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->home->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"home.Image")));
-			this->home->Location = System::Drawing::Point(40, 105);
-			this->home->Name = L"home";
-			this->home->Size = System::Drawing::Size(53, 55);
-			this->home->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
-			this->home->TabIndex = 7;
-			this->home->TabStop = false;
-			this->home->Click += gcnew System::EventHandler(this, &TrainingMode::home_Click);
-			// 
-			// loading
-			// 
-			this->loading->AutoSize = true;
-			this->loading->Location = System::Drawing::Point(37, 20);
-			this->loading->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
-			this->loading->Name = L"loading";
-			this->loading->Size = System::Drawing::Size(66, 17);
-			this->loading->TabIndex = 0;
-			this->loading->Text = L"loading";
-			// 
 			// panel2
 			// 
 			this->panel2->BackColor = System::Drawing::Color::Transparent;
@@ -443,19 +379,20 @@ namespace Project1 {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(11, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackColor = System::Drawing::Color::Gold;
+			this->BackColor = System::Drawing::Color::Gray;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
-			this->ClientSize = System::Drawing::Size(807, 497);
-			this->Controls->Add(this->panel3);
+			this->ClientSize = System::Drawing::Size(904, 501);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->trainingimage);
-			this->Controls->Add(this->title);
 			this->DoubleBuffered = true;
 			this->Font = (gcnew System::Drawing::Font(L"Showcard Gothic", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Margin = System::Windows::Forms::Padding(5, 4, 5, 4);
+			this->MaximizeBox = false;
 			this->Name = L"TrainingMode";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"TrainingMode";
@@ -467,9 +404,6 @@ namespace Project1 {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->form3))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->form2))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->form1))->EndInit();
-			this->panel3->ResumeLayout(false);
-			this->panel3->PerformLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->home))->EndInit();
 			this->panel2->ResumeLayout(false);
 			this->panel2->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->back))->EndInit();
@@ -477,13 +411,11 @@ namespace Project1 {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->centralpos))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->initialpos))->EndInit();
 			this->ResumeLayout(false);
-			this->PerformLayout();
-			this->startThread();
+
 		}
 #pragma endregion
 	private: System::Void TrainingMode_Load(System::Object^  sender, System::EventArgs^  e) {
 		panel2->Visible = false;
-		panel3->Visible = false;
 	}
 	private: System::Void panel1_Paint(System::Object^  sender, System::Windows::Forms::PaintEventArgs^  e) {
 	}
@@ -502,61 +434,25 @@ private: System::Void form2_Click(System::Object^  sender, System::EventArgs^  e
 	currentform = "form2";
 	panel2->Visible = true;
 	panel1->Visible = false;
-	// form = "Arhat holds sea";
+	// form = "Brush hand and fist in bow stance";
 }
 private: System::Void form3_Click(System::Object^  sender, System::EventArgs^  e) {
 	currentform = "form3";
 	panel2->Visible = true;
 	panel1->Visible = false;
-	// form = "Brush hand and fist in bow stance";
+	// form = "Twist body and thrust fist in rest stance";
 }
 private: System::Void home_Click(System::Object^  sender, System::EventArgs^  e) {
 	panel1->Visible = true;
-	panel3->Visible = false;
 }
 private: System::Void back_Click_1(System::Object^  sender, System::EventArgs^  e) {
 	panel2->Visible = false;
-	panel3->Visible = false;
 	panel1->Visible = true;
 }
 private: System::Void initialpos_Click(System::Object^  sender, System::EventArgs^  e) {
 	if (currentform == "form1") {
-		currentpos = "Horse-with-separate-palms";
+		currentpos = "horse-with-separate-palms";
 		
-	}
-	else if (currentform == "form2") {
-		currentpos = "crouch-on-the-ground";
-	}
-	else if (currentform == "form3") {
-		currentpos = "hit-with-elbows";
-	}
-	else {
-		currentpos = "";
-	}
-	panel3->Visible = true;
-	panel1->Visible = false;
-	panel2->Visible = false;
-}
-private: System::Void centralpos_Click(System::Object^  sender, System::EventArgs^  e) {
-	if (currentform == "form1") {
-		currentpos = "Bow-with-grip";
-	}
-	else if (currentform == "form2") {
-		currentpos = "Hands-illusion";
-	}
-	else if (currentform == "form3") {
-		currentpos = "Rush-hand";
-	}
-	else {
-		currentpos = "";
-	}
-	panel3->Visible = true;
-	panel1->Visible = false;
-	panel2->Visible = false;
-}
-private: System::Void finalpos_Click(System::Object^  sender, System::EventArgs^  e) {
-	if (currentform == "form1") {
-		currentpos = "Heart-strike";
 	}
 	else if (currentform == "form2") {
 		currentpos = "hit-with-elbows";
@@ -567,26 +463,63 @@ private: System::Void finalpos_Click(System::Object^  sender, System::EventArgs^
 	else {
 		currentpos = "";
 	}
-	//this->getImageFromKinect();
-	panel3->Visible = true;
 	panel1->Visible = false;
-	panel2->Visible = false;
+	panel2->Visible = true;
+	save_dbdata = TRUE;
+}
+private: System::Void centralpos_Click(System::Object^  sender, System::EventArgs^  e) {
+	if (currentform == "form1") {
+		currentpos = "bow-with-grip";
+	}
+	else if (currentform == "form2") {
+		currentpos = "rush-hand";
+	}
+	else if (currentform == "form3") {
+		currentpos = "circular-hammel-fist";
+	}
+	else {
+		currentpos = "";
+	}
+	panel1->Visible = false;
+	panel2->Visible = true;
+	save_dbdata = TRUE;
+}
+private: System::Void finalpos_Click(System::Object^  sender, System::EventArgs^  e) {
+	if (currentform == "form1") {
+		currentpos = "heart-strike";
+	}
+	else if (currentform == "form2") {
+		currentpos = "thrust-fist";
+	}
+	else if (currentform == "form3") {
+		currentpos = "left-fist-rest-stance";
+	}
+	else {
+		currentpos = "";
+	}
+	panel1->Visible = false;
+	panel2->Visible = true;
+	save_dbdata = TRUE;
+
 }
 private: System::Void panel3_Paint(System::Object^  sender, System::Windows::Forms::PaintEventArgs^  e) {
 }
 
-private: void getImageFromKinect() {
+private: System::Void getImageFromKinect() {
 	array<unsigned char>^ buffer = gcnew array<unsigned char>(streamsize);
-	//String^ x = gcnew String("");
+	DBhandle dbh;
+	std::string joints = "";
+	std::string pos = "";
+	String^ posS = "";
 	//int y = 0;
 	Bitmap^ bmp = gcnew Bitmap(width, height, System::Drawing::Imaging::PixelFormat::Format24bppRgb);
 	System::Drawing::Rectangle^ rect = gcnew System::Drawing::Rectangle(0, 0, bmp->Width, bmp->Height);
-	
 	int lockimage = 0;
 	while(1){
-		//x = gcnew String((Connect2Kinect::getPInstance().getData()).c_str());// esto debe estar aquí porque hay stackoverflow en el getrgbdata
+		joints = Connect2Kinect::getPInstance().getData();// esto debe estar aquí porque hay stackoverflow en el getdatargb
 		lockimage = Connect2Kinect::getPInstance().getDataRGB(buffer,1);
 		if (lockimage == 1) {
+			if (joints != "") { addJointsToImageData(buffer, joints); }
 			System::Drawing::Imaging::BitmapData^ bmp_data = bmp->LockBits(*rect, System::Drawing::Imaging::ImageLockMode::WriteOnly, System::Drawing::Imaging::PixelFormat::Format24bppRgb);
 			System::Runtime::InteropServices::Marshal::Copy(buffer, 0, bmp_data->Scan0, streamsize);
 			bmp->UnlockBits(bmp_data);
@@ -597,6 +530,18 @@ private: void getImageFromKinect() {
 			trainingimage->Invoke(gcnew Action<Image ^>(trainingimage, &PictureBox::Image::set), bmp);
 			trainingimage->Invoke(gcnew Action(trainingimage, &PictureBox::Update));
 		}
+		if (save_dbdata) {
+			if (joints != "") {
+				posS = currentpos;
+				pos = msclr::interop::marshal_as<std::string>(posS);
+				joints = "'" + pos + "'," + joints;
+				dbh.saveJoints(joints);
+				posS = gcnew String(("Saved position " + pos).c_str());
+				MessageBox::Show(posS);
+				save_dbdata = FALSE;
+				joints = "";
+			}
+		}
 		//MessageBox::Show(x);
 		/*
 		x = gcnew String(System::Convert::ToString(y));
@@ -605,7 +550,6 @@ private: void getImageFromKinect() {
 		}else{
 			y += 1;
 		}
-		
 		if (this->title->IsHandleCreated) {
 			title->Invoke(gcnew Action<String ^>(title,&Label::Text::set),x);
 			title->Invoke(gcnew Action(title, &Label::Update));
@@ -616,8 +560,137 @@ private: void getImageFromKinect() {
 	}
 }
 private: Thread^ trd;
+public: System::String^ currentform = "";
+public: System::String^ currentpos = "";
+public: BOOL save_dbdata = FALSE;
+private:System::Void addJointsToImageData(array<unsigned char>^ data, std::string jointsstring) {
+	double jointsArray[20][3],xt, yt, angx, angy, xr, yr, xpix, ypix;
+	int i = 0;
+	INT32 idx;
+	std::string str = jointsstring;
+	size_t pos = 0;
+	size_t post = 0;
+	std::string delimiter = "'";
+	std::string token;
+	str.pop_back();
+	str.erase(0, 1);
+	while ((pos = str.find(delimiter)) != std::string::npos) {
+		token = str.substr(0, pos);
+		str.erase(0, pos + 3);
+		for (int j = 0; j < 2; j++) {
+			post = token.find(",");
+			jointsArray[i][j] = strtod((token.substr(0, post)).c_str(), NULL);
+			token.erase(0, post + 1);
+		}
+		jointsArray[i][2] = strtod(token.c_str(), NULL);
+		
+		i++;
+	}
+	
+	for (int j = 0; j < 2; j++) {
+		post = str.find(",");
+		jointsArray[i][j] = strtod((str.substr(0, post)).c_str(), NULL);
+		str.erase(0, post + 1);
+	}
+	jointsArray[i][2] = strtod(str.c_str(), NULL);
+	//MessageBox::Show("string to array done!");
+	// --------------------put joints into image----------------------------------
+	
+	for (int i = 0; i < 20; i++) {
+		xt = jointsArray[i][0] * 320 / 2.2;
+		yt = jointsArray[i][1] * 240 / 1.6;
+		
+		angx = 57 * xt / 640;
+		angy = 43 * yt / 480;
+		
+		xr = tan(angx*3.14159265359 / 180) * 640 * 4 / (jointsArray[i][2]);
+		yr = tan(angy*3.14159265359 / 180) * 480 * 4.5 / (jointsArray[i][2]);
 
-private: void startThread() {
+		xpix = 320 + xr;
+		ypix = abs(yr - 240) + 15;
+
+		if (abs(xpix) > 639) 
+			xpix = 639;
+		if (abs(ypix) > 479) 
+			ypix = 479;
+
+		// DRAW IMAGE
+		if (xpix > 0 && xpix < 639) {
+		
+			if (ypix > 0 && ypix < 479) {
+				// Inferior
+				idx = (width * 3) * (int(ypix) - 1) + 3 * int(xpix);
+				data[idx] = 0;
+				data[idx + 1] = 255;
+				data[idx + 2] = 0;
+				// Superior
+				idx = (width * 3) * (int(ypix) + 1) + 3 * int(xpix);
+				data[idx] = 0;
+				data[idx + 1] = 255;
+				data[idx + 2] = 0;
+			}
+
+			//  Central
+			idx = (width*3) * int(ypix) + 3 * int(xpix);
+			data[idx-3] = 0;
+			data[idx-2] = 255;
+			data[idx-1] = 0;
+			data[idx] = 0;
+			data[idx + 1] = 255;
+			data[idx + 2] = 0;
+			data[idx+3] = 0;
+			data[idx + 4] = 255;
+			data[idx + 5] = 0;
+		}
+	}
+	
+	
+	
+	//idx = (width*3) * int(20) + 3 * int(20);
+	//data[idx] = 255;
+	//data[idx + 1] = 255;
+	//data[idx + 2] = 255;
+	//idx = (width*3) * int(400) + 3 * int(20);
+	//data[idx] = 0;
+	//data[idx + 1] = 0;
+	//data[idx + 2] = 255;
+	//idx = (width) * int(400) + 3 * int(20);
+	//data[idx] = 0;
+	//data[idx + 1] = 255;
+	//data[idx + 2] = 0;
+	
+}
+private: System::Void TransformJointsStringToArray(float jointsArray[][3], std::string jointsstring) {
+	std::string str = jointsstring;
+	size_t pos = 0;
+	size_t post = 0;
+	std::string delimiter = "'";
+	std::string token;
+	int i = 0;
+	str.pop_back();
+	str.erase(0, 1);
+	while ((pos = str.find(delimiter)) != std::string::npos) {
+		token = str.substr(0, pos);
+		str.erase(0, pos + 3);
+		token.pop_back();
+		token.erase(0,1);
+		for (int j = 0; j < 2; j++) {
+			post = token.find(",");
+			jointsArray[i][j] = strtof((token.substr(0, pos)).c_str(),0);
+			token.erase(0, pos + 1);
+		}
+		jointsArray[i][3] = strtof(token.c_str(), 0);
+		i++;
+	}
+	str.pop_back();
+	str.erase(0, 1);
+	for (int j = 0; j < 2; j++) {
+		post = str.find(",");
+		jointsArray[i][j] = strtof((str.substr(0, pos)).c_str(), 0);
+		str.erase(0, pos + 1);
+	}
+}
+private: System::Void startThread() {
 	
 	ThreadStart^ delegate = gcnew ThreadStart(this, &TrainingMode::getImageFromKinect);
 	trd = gcnew Thread(delegate);
