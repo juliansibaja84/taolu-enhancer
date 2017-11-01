@@ -15,5 +15,6 @@ class DBhandle {
 		int saveJoints(std::string data); //data is a string with the form "'move','joint0','joint1',...,'joint19'"
 		int saveAngles(std::string data); //data is a string with the form "'move',angle1,angle2,...angle13"
 		int convertJoints2Angles();
+		int saveDataForTraining();
 };
 #endif

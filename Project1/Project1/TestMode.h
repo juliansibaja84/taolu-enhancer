@@ -1,5 +1,5 @@
 #pragma once
-
+#include "DBhandle.h"
 namespace Project1 {
 
 	using namespace System;
@@ -21,6 +21,7 @@ namespace Project1 {
 			//
 			//TODO: agregar código de constructor aquí
 			//
+			generateModel();
 		}
 
 	protected:
@@ -271,6 +272,11 @@ private: System::Void start_Click(System::Object^  sender, System::EventArgs^  e
 	ChangeTextStop();
 
 	// COMIENZA GRABACIÓN DEL KINECT
+}
+private: System::Void generateModel() {
+	DBhandle dbh;
+	dbh.convertJoints2Angles();
+	dbh.saveDataForTraining();
 }
 };
 }

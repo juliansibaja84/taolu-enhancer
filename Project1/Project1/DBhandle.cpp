@@ -6,11 +6,18 @@
 #include <stdlib.h>
 #include <sqlite3.h>
 #include <string>
+#include <iostream>
+#include <fstream>
 
 using Record = std::vector<std::string>;
 using Records = std::vector<Record>;
 
 static std::string float2str(float num) {
+	std::ostringstream ss;
+	ss << num;
+	return ss.str();
+}
+static std::string int2str(int num) {
 	std::ostringstream ss;
 	ss << num;
 	return ss.str();
@@ -34,7 +41,6 @@ static int CB_showFetch(void *NotUsed, int ncolumns, char **rowfields, char **co
 
 
 static int CB_getData(void* data, int ncolumns, char **rowfields, char **columnnames) {
-	int i;
 	Utils U;
 	Records* records = static_cast<Records*>(data);
 
@@ -275,7 +281,7 @@ int DBhandle::convertJoints2Angles() {
 	sqlite3 *db;
 	char *zErrMsg = 0;
 	int rc;
-	const char* data = "Callback(CB_doNothing) function called";
+	const char* data = "Callback(CB_getData) function called";
 	std::string sqls;
 	rc = sqlite3_open(DBhandle::dbname.c_str(), &db);
 
@@ -403,6 +409,56 @@ int DBhandle::convertJoints2Angles() {
 		DBhandle::saveAngles(sqls);
 	}
 	//fprintf(stderr, "Angles saved succesfully\n");
+	sqlite3_close(db);
+	return 0;
+}
+
+int DBhandle::saveDataForTraining() {
+	Records recs;
+	sqlite3 *db;
+	Utils U;
+	remove("data_for_training");
+	std::ofstream file;
+	file.open("data_for_training");
+	char *zErrMsg = 0;
+	int rc;
+	const char* data = "Callback(CB_getData) function called";
+	std::string sqls;
+	rc = sqlite3_open(DBhandle::dbname.c_str(), &db);
+
+	if (rc) {
+		fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
+		return(0);
+	}
+	else {
+		//fprintf(stderr, "Opened database successfully\n");
+	}
+
+	sqls = "SELECT * FROM angles";
+	rc = sqlite3_exec(db, sqls.c_str(), CB_getData, &recs, &zErrMsg);
+
+	if (rc != SQLITE_OK) {
+		fprintf(stderr, "SQL error: %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	}
+	else {
+		// nothing
+	}
+	U.classtointeger.insert(std::pair<std::string, std::string>("unknown", "0"));
+	for (int i = 0; i < recs.size(); ++i) {
+		// recs[i][0] id
+		// recs[i][1] move
+		// recs[i][2,:] angulos
+		if (U.classtointeger.count(recs[i][1]) == 0) {
+			U.classtointeger.insert(std::pair<std::string, std::string>(recs[i][1], int2str(U.classtointeger.size())));
+		}
+		file << U.classtointeger[recs[i][1]] + " 1:" + recs[i][2] + " 2:" + recs[i][3] + " 3:" + recs[i][4]
+			+ " 4:" + recs[i][5] + " 5:" + recs[i][6] + " 6:" + recs[i][7] + " 7:" + recs[i][8]
+			+ " 8:" + recs[i][9] + " 9:" + recs[i][10] + " 10:" + recs[i][11] + " 11:" + recs[i][12]
+			+ " 12:" + recs[i][13] + " 13:" + recs[i][14]+"\n";
+	}
+
+	file.close();
 	sqlite3_close(db);
 	return 0;
 }

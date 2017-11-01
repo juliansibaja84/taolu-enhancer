@@ -1,4 +1,5 @@
 #include <string>
+#include <map>
 #ifndef Utils_H
 #define Utils_H
 
@@ -33,5 +34,6 @@ class Utils {
 		float dot(float v[],float u[],int size);
 		float norm(float v[],int size);
 		Joint str2joint(std::string str);
+		std::map<std::string,std::string> classtointeger;
 };
 #endif
