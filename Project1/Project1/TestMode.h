@@ -61,6 +61,7 @@ namespace Project1 {
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::Label^  predictedpos;
+	private: System::Windows::Forms::Button^  button1;
 
 
 	private: System::ComponentModel::IContainer^  components;
@@ -93,6 +94,7 @@ namespace Project1 {
 			this->predictedform = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->testimage))->BeginInit();
 			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->stop))->BeginInit();
@@ -128,7 +130,7 @@ namespace Project1 {
 			this->panel1->Controls->Add(this->startop);
 			this->panel1->Controls->Add(this->stop);
 			this->panel1->Controls->Add(this->start);
-			this->panel1->Location = System::Drawing::Point(81, 242);
+			this->panel1->Location = System::Drawing::Point(81, 312);
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(73, 100);
 			this->panel1->TabIndex = 2;
@@ -225,6 +227,16 @@ namespace Project1 {
 			this->label1->TabIndex = 0;
 			this->label1->Text = L"forma:";
 			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(73, 253);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(92, 32);
+			this->button1->TabIndex = 4;
+			this->button1->Text = L"Predict";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &TestMode::button1_Click);
+			// 
 			// TestMode
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(11, 20);
@@ -233,6 +245,7 @@ namespace Project1 {
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
 			this->ClientSize = System::Drawing::Size(784, 441);
+			this->Controls->Add(this->button1);
 			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->testimage);
@@ -349,7 +362,7 @@ private: System::Void getImageFromKinect() {
 						break; // to stop searching
 					}
 				}
-				
+				MessageBox::Show(key);
 			}
 		}
 		Thread::Sleep(10);
@@ -362,6 +375,9 @@ private: System::Void startThread() {
 	(*trd).IsBackground = true;
 	(*trd).Start();
 
+}
+private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+	predict = true;
 }
 };
 }
