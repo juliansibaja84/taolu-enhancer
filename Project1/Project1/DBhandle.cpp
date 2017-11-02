@@ -448,14 +448,14 @@ int DBhandle::saveDataForTraining() {
 	for (int i = 0; i < recs.size(); ++i) {
 		// recs[i][0] id
 		// recs[i][1] move
-		// recs[i][2,:] angulos
+		// recs[i][2,:] angles
 		if (U.classtointeger.count(recs[i][1]) == 0) {
 			U.classtointeger.insert(std::pair<std::string, std::string>(recs[i][1], int2str(U.classtointeger.size())));
 		}
 		file << U.classtointeger[recs[i][1]] + " 1:" + recs[i][2] + " 2:" + recs[i][3] + " 3:" + recs[i][4]
 			+ " 4:" + recs[i][5] + " 5:" + recs[i][6] + " 6:" + recs[i][7] + " 7:" + recs[i][8]
 			+ " 8:" + recs[i][9] + " 9:" + recs[i][10] + " 10:" + recs[i][11] + " 11:" + recs[i][12]
-			+ " 12:" + recs[i][13] + " 13:" + recs[i][14]+"\n";
+			+ " 12:" + recs[i][13] + " 13:" + recs[i][14] + "\n";
 	}
 
 	file.close();

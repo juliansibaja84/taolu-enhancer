@@ -1,5 +1,6 @@
 #pragma once
 #include "DBhandle.h"
+#include "Classifier.h"
 namespace Project1 {
 
 	using namespace System;
@@ -273,10 +274,17 @@ private: System::Void start_Click(System::Object^  sender, System::EventArgs^  e
 
 	// COMIENZA GRABACIÓN DEL KINECT
 }
-private: System::Void generateModel() {
-	DBhandle dbh;
-	dbh.convertJoints2Angles();
+	private: System::Void generateModel() {
+		DBhandle dbh;
+		Classifier cls;
+		System::String^ x;
+		//double anglessample[] = { 3.05458 , 2.8185 , 2.791 , 2.80899 , 2.76042 , 2.47989 , 2.50082 , 2.03454 , 1.9806 , 1.70052 , 1.60372 , 2.55284 , 2.33598 }; // |
+		//double anglessample[] = { 2.80381, 2.45424, 2.61379, 1.31193, 2.93246, 2.91801, 2.68098, 2.47769, 2.77961, 0.940495, 1.85448, 2.44962, 2.29614 };   // 5
+		double anglessample[] = { 2.83516, 2.93061, 1.50215, 2.33439, 2.27075, 2.20532, 2.35499, 2.82366, 2.70627, 0.670907, 0.932144, 1.42013, 1.58839 }; // 7
+	//dbh.convertJoints2Angles();
 	dbh.saveDataForTraining();
+	cls.doTraining();
+	MessageBox::Show(gcnew String(System::Convert::ToString(cls.doPrediction(anglessample))));
 }
 };
 }

@@ -7,21 +7,6 @@ using namespace System::Threading;
 
 Connect2Kinect *Connect2Kinect::instance = 0;
 
-/*
-ref class Work
-{
-public:
-
-	int * Data;
-	void DoMoreWork()
-	{
-		while(1)
-			(Data)();
-	}
-
-};
-*/
-
 [STAThread]
 void Main()
 {

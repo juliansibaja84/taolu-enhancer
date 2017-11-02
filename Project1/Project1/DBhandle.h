@@ -1,5 +1,5 @@
 #include <string>
-
+#include "Utils.h"
 #ifndef DBhandle_H
 #define DBhandle_H
 
@@ -16,5 +16,6 @@ class DBhandle {
 		int saveAngles(std::string data); //data is a string with the form "'move',angle1,angle2,...angle13"
 		int convertJoints2Angles();
 		int saveDataForTraining();
+		Utils Ut;
 };
 #endif
