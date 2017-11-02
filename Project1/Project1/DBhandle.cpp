@@ -336,7 +336,6 @@ int DBhandle::convertJoints2Angles() {
 
 	sqls = "";
 	for (int i = 0; i < recs.size(); ++i) {
-		Utils U;
 		sqls = "";
 		Utils::Joint J1, J2, J3;
 		sqls = sqls + "'" + recs[i][1] + "'";
@@ -416,7 +415,6 @@ int DBhandle::convertJoints2Angles() {
 int DBhandle::saveDataForTraining() {
 	Records recs;
 	sqlite3 *db;
-	Utils U;
 	remove("data_for_training");
 	std::ofstream file;
 	file.open("data_for_training");

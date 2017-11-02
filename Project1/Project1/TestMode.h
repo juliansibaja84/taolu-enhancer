@@ -1,6 +1,10 @@
 #pragma once
 #include "DBhandle.h"
+#include "Connect2Kinect.h"
 #include "Classifier.h"
+#include <msclr\marshal_cppstd.h>
+#include <math.h>
+
 namespace Project1 {
 
 	using namespace System;
@@ -9,7 +13,7 @@ namespace Project1 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-
+	using namespace System::Threading;
 	/// <summary>
 	/// Resumen de TestMode
 	/// </summary>
@@ -22,7 +26,7 @@ namespace Project1 {
 			//
 			//TODO: agregar código de constructor aquí
 			//
-			generateModel();
+			startThread();
 		}
 
 	protected:
@@ -34,6 +38,9 @@ namespace Project1 {
 			if (components)
 			{
 				delete components;
+			}
+			if (this->trd->IsAlive) {
+				trd->Abort();
 			}
 		}
 	private: System::Windows::Forms::Label^  title;
@@ -274,17 +281,87 @@ private: System::Void start_Click(System::Object^  sender, System::EventArgs^  e
 
 	// COMIENZA GRABACIÓN DEL KINECT
 }
-	private: System::Void generateModel() {
-		DBhandle dbh;
-		Classifier cls;
-		System::String^ x;
-		//double anglessample[] = { 3.05458 , 2.8185 , 2.791 , 2.80899 , 2.76042 , 2.47989 , 2.50082 , 2.03454 , 1.9806 , 1.70052 , 1.60372 , 2.55284 , 2.33598 }; // |
-		//double anglessample[] = { 2.80381, 2.45424, 2.61379, 1.31193, 2.93246, 2.91801, 2.68098, 2.47769, 2.77961, 0.940495, 1.85448, 2.44962, 2.29614 };   // 5
-		double anglessample[] = { 2.83516, 2.93061, 1.50215, 2.33439, 2.27075, 2.20532, 2.35499, 2.82366, 2.70627, 0.670907, 0.932144, 1.42013, 1.58839 }; // 7
-	//dbh.convertJoints2Angles();
+private: System::Void generateModel(DBhandle dbh, Classifier cls) {
+	//System::String^ key;
+	//double anglessample[] = { 3.05458 , 2.8185 , 2.791 , 2.80899 , 2.76042 , 2.47989 , 2.50082 , 2.03454 , 1.9806 , 1.70052 , 1.60372 , 2.55284 , 2.33598 }; // |
+	//double anglessample[] = { 2.80381, 2.45424, 2.61379, 1.31193, 2.93246, 2.91801, 2.68098, 2.47769, 2.77961, 0.940495, 1.85448, 2.44962, 2.29614 };   // 5
+	//double anglessample[] = { 2.83516, 2.93061, 1.50215, 2.33439, 2.27075, 2.20532, 2.35499, 2.82366, 2.70627, 0.670907, 0.932144, 1.42013, 1.58839 }; // 7
+	//std::string str = "'9,3,6','3,4,3','3,14,5','11,4,3','9,3,6','3,4,3','3,14,5','11,4,3','9,3,6','3,4,3','3,14,5','11,4,3','9,3,6','3,4,3','3,14,5','11,4,3','9,3,6','3,4,3','3,14,5','11,4,3'";
+	dbh.convertJoints2Angles();
 	dbh.saveDataForTraining();
 	cls.doTraining();
-	MessageBox::Show(gcnew String(System::Convert::ToString(cls.doPrediction(anglessample))));
+	/*
+	std::ostringstream strs;
+	strs << cls.doPrediction(dbh.U.jointsToAnglesarray(str));
+	std::string predicted_label = strs.str();
+	
+	for (auto &i : dbh.U.classtointeger) {
+		if (i.second == predicted_label) {
+			key = gcnew String(i.first.c_str());
+			break; // to stop searching
+		}
+	}
+	MessageBox::Show(key);*/
+}
+
+
+private: Thread^ trd;
+public: BOOL predict = FALSE;
+
+
+private: System::Void getImageFromKinect() {
+	Classifier cls;
+	DBhandle dbh;
+	generateModel(dbh, cls);
+	array<unsigned char>^ buffer = gcnew array<unsigned char>(width*height*3);
+	MessageBox::Show("holi");
+	std::string joints = "";
+	std::string pos = "";
+	String^ posS = "";
+	String^ key;
+	//int y = 0;
+	Bitmap^ bmp = gcnew Bitmap(width, height, System::Drawing::Imaging::PixelFormat::Format24bppRgb);
+	System::Drawing::Rectangle^ rect = gcnew System::Drawing::Rectangle(0, 0, bmp->Width, bmp->Height);
+	int lockimage = 0;
+	while (1) {
+		joints = Connect2Kinect::getPInstance().getData();// esto debe estar aquí porque hay stackoverflow en el getdatargb
+		lockimage = Connect2Kinect::getPInstance().getDataRGB(buffer, 1);
+		if (lockimage == 1) {
+			//if (joints != "") { addJointsToImageData(buffer, joints); }
+			System::Drawing::Imaging::BitmapData^ bmp_data = bmp->LockBits(*rect, System::Drawing::Imaging::ImageLockMode::WriteOnly, System::Drawing::Imaging::PixelFormat::Format24bppRgb);
+			System::Runtime::InteropServices::Marshal::Copy(buffer, 0, bmp_data->Scan0, width*height * 3);
+			bmp->UnlockBits(bmp_data);
+		}
+
+		if (this->testimage->IsHandleCreated && lockimage == 1)
+		{
+			testimage->Invoke(gcnew Action<Image ^>(testimage, &PictureBox::Image::set), bmp);
+			testimage->Invoke(gcnew Action(testimage, &PictureBox::Update));
+		}
+		if (predict) {
+			if (joints != "") {
+				std::ostringstream strs;
+				strs << cls.doPrediction(dbh.U.jointsToAnglesarray(joints));
+				std::string predicted_label = strs.str();
+				for (auto &i : dbh.U.classtointeger) {
+					if (i.second == predicted_label) {
+						key = gcnew String(("The predicted position is : " + i.first).c_str());
+						break; // to stop searching
+					}
+				}
+				
+			}
+		}
+		Thread::Sleep(10);
+	}
+}
+private: System::Void startThread() {
+
+	ThreadStart^ delegate = gcnew ThreadStart(this, &TestMode::getImageFromKinect);
+	trd = gcnew Thread(delegate);
+	(*trd).IsBackground = true;
+	(*trd).Start();
+
 }
 };
 }

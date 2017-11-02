@@ -28,12 +28,15 @@ class Utils {
 			int NUI_SKELETON_POSITION_FOOT_RIGHT = 19;
 		};
 	public:
-		struct Joint { float x; float y; float z;};
+		struct Joint { double x; double y; double z;};
 		Joints_definitions JD;
-		float calculateAngleProjection(Joint inferior, Joint central, Joint superior);
-		float dot(float v[],float u[],int size);
-		float norm(float v[],int size);
+		double calculateAngleProjection(Joint inferior, Joint central, Joint superior);
+		double dot(double v[], double u[], int size);
+		double norm(double v[], int size);
 		Joint str2joint(std::string str);
+		Utils::Joint Utils::array2joint(double * a);
 		std::map<std::string,std::string> classtointeger;
+		double* jointsToAnglesarray(std::string str);
+		
 };
 #endif

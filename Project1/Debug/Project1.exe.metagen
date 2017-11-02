@@ -26,6 +26,8 @@ Class Project1.TrainingMode: AutoLayout, AnsiClass, Class, Public, BeforeFieldIn
 Class Project1.TestMode: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Int32 predict : Public
 Class Project1.MyForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
