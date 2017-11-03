@@ -1,7 +1,7 @@
 #include "Utils.h"
 #include <math.h>
-#include <string>
 #include <iostream>
+
 
 Utils::Utils() {
 	formmap.insert(std::pair<std::string, std::string>("Strike the hearth with fist", "horse-with-separate-palms,bow-with-grip,heart-strike"));
@@ -47,18 +47,18 @@ Utils::Joint Utils::str2joint(std::string str) {
 	J.z = std::stof(str.substr(pl + 1));
 	return J;
 }
-Utils::Joint Utils::array2joint(float * a) {
+Utils::Joint Utils::array2joint(double a[][3], int i) {
 	Utils::Joint J;
-	J.x = a[0];
-	J.y = a[1];
-	J.z = a[2];
+	J.x = a[i][0];
+	J.y = a[i][1];
+	J.z = a[i][2];
 	return J;
 }
 
-float* Utils::jointsToAnglesarray(std::string str, float a[]) {
-	float jointsArray[20][3];
-	//float a[13];
-	int i = 0, idx;
+std::string Utils::jointsToAnglesarray(std::string ss, double a[]) {
+	double jointsArray[20][3];
+	int i = 0;
+	std::string str = ss;
 	size_t pos = 0;
 	size_t post = 0;
 	std::string delimiter = "'";
@@ -68,91 +68,100 @@ float* Utils::jointsToAnglesarray(std::string str, float a[]) {
 	while ((pos = str.find(delimiter)) != std::string::npos) {
 		token = str.substr(0, pos);
 		str.erase(0, pos + 3);
-		token.pop_back();
-		token.erase(0, 1);
 		for (int j = 0; j < 2; j++) {
 			post = token.find(",");
-			jointsArray[i][j] = strtof((token.substr(0, pos)).c_str(), 0);
-			token.erase(0, pos + 1);
+			jointsArray[i][j] = strtod((token.substr(0, post)).c_str(), NULL);
+			token.erase(0, post + 1);
 		}
-		jointsArray[i][2] = strtof(token.c_str(), 0);
+		jointsArray[i][2] = strtod(token.c_str(), NULL);
+
 		i++;
 	}
-	str.pop_back();
-	str.erase(0, 1);
+
 	for (int j = 0; j < 2; j++) {
 		post = str.find(",");
-		jointsArray[i][j] = strtof((str.substr(0, pos)).c_str(), 0);
-		str.erase(0, pos + 1);
+		jointsArray[i][j] = strtod((str.substr(0, post)).c_str(), NULL);
+		str.erase(0, post + 1);
 	}
 	jointsArray[i][2] = strtod(str.c_str(), NULL);
+
 	Utils::Joint J1, J2, J3;
 	// Neck - Head Angle :
-	J3 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_SPINE]);
-	J2 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_SHOULDER_CENTER]);
-	J1 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_HEAD]);
+	J3 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_SPINE);
+	J2 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_SHOULDER_CENTER);
+	J1 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_HEAD);
 	a[0] = calculateAngleProjection(J1, J2, J3);
 	// Neck - Elbow - Right Angle :
-	J1 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_SHOULDER_CENTER]);
-	J2 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_SHOULDER_RIGHT]);
-	J3 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_ELBOW_RIGHT]);
+	J1 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_SHOULDER_CENTER);
+	J2 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_SHOULDER_RIGHT);
+	J3 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_ELBOW_RIGHT);
 	a[1] = calculateAngleProjection(J1, J2, J3);
 	//  Neck-Elbow-Left Angle:
-	J1 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_SHOULDER_CENTER]);
-	J2 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_SHOULDER_LEFT]);
-	J3 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_ELBOW_LEFT]);
+	J1 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_SHOULDER_CENTER);
+	J2 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_SHOULDER_LEFT);
+	J3 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_ELBOW_LEFT);
 	a[2] = calculateAngleProjection(J1, J2, J3);
 	// Elbow-Hand-Right Angle:
-	J1 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_SHOULDER_RIGHT]);
-	J2 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_ELBOW_RIGHT]);
-	J3 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_HAND_RIGHT]);
+	J1 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_SHOULDER_RIGHT);
+	J2 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_ELBOW_RIGHT);
+	J3 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_HAND_RIGHT);
 	a[3] = calculateAngleProjection(J1, J2, J3);
 	// Elbow-Hand-Left Angle:
-	J1 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_SHOULDER_LEFT]);
-	J2 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_ELBOW_LEFT]);
-	J3 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_HAND_LEFT]);
+	J1 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_SHOULDER_LEFT);
+	J2 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_ELBOW_LEFT);
+	J3 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_HAND_LEFT);
 	a[4] = calculateAngleProjection(J1, J2, J3);
 	// Hip-Leg-Right Angle:
-	J1 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_HIP_CENTER]);
-	J2 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_HIP_RIGHT]);
-	J3 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_KNEE_RIGHT]);
+	J1 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_HIP_CENTER);
+	J2 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_HIP_RIGHT);
+	J3 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_KNEE_RIGHT);
 	a[5] = calculateAngleProjection(J1, J2, J3);
 	// Hip-Leg-Left Angle:
-	J1 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_HIP_CENTER]);
-	J2 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_HIP_LEFT]);
-	J3 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_KNEE_LEFT]);
+	J1 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_HIP_CENTER);
+	J2 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_HIP_LEFT);
+	J3 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_KNEE_LEFT);
 	a[6] = calculateAngleProjection(J1, J2, J3);
 	// Leg-Leg-Right Angle:
-	J1 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_HIP_RIGHT]);
-	J2 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_KNEE_RIGHT]);
-	J3 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_FOOT_RIGHT]);
+	J1 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_HIP_RIGHT);
+	J2 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_KNEE_RIGHT);
+	J3 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_FOOT_RIGHT);
 	a[7] = calculateAngleProjection(J1, J2, J3);
 	// Leg-Leg-Left Angle:
-	J1 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_HIP_LEFT]);
-	J2 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_KNEE_LEFT]);
-	J3 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_FOOT_LEFT]);
+	J1 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_HIP_LEFT);
+	J2 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_KNEE_LEFT);
+	J3 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_FOOT_LEFT);
 	a[8] = calculateAngleProjection(J1, J2, J3);
 	// Arm-Hip-Right Angle:
-	J1 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_ELBOW_RIGHT]);
-	J2 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_SHOULDER_RIGHT]);
-	J3 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_HIP_RIGHT]);
+	J1 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_ELBOW_RIGHT);
+	J2 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_SHOULDER_RIGHT);
+	J3 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_HIP_RIGHT);
 	a[9] = calculateAngleProjection(J1, J2, J3);
 	// Arm-Hip-Left Angle:
-	J1 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_ELBOW_LEFT]);
-	J2 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_SHOULDER_LEFT]);
-	J3 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_HIP_LEFT]);
+	J1 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_ELBOW_LEFT);
+	J2 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_SHOULDER_LEFT);
+	J3 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_HIP_LEFT);
 	a[10] = calculateAngleProjection(J1, J2, J3);
 	// Thigh-Hipline-Right
-	J1 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_HIP_LEFT]);
-	J2 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_HIP_RIGHT]);
-	J3 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_KNEE_RIGHT]);
+	J1 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_HIP_LEFT);
+	J2 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_HIP_RIGHT);
+	J3 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_KNEE_RIGHT);
 	a[11] = calculateAngleProjection(J1, J2, J3);
 	// Thigh-Hipline-Left
-	J1 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_HIP_RIGHT]);
-	J2 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_HIP_LEFT]);
-	J3 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_KNEE_LEFT]);
+	J1 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_HIP_RIGHT);
+	J2 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_HIP_LEFT);
+	J3 = array2joint(jointsArray, JD.NUI_SKELETON_POSITION_KNEE_LEFT);
 	a[12] = calculateAngleProjection(J1, J2, J3);
 
-	return a;
+	std::string toreturn = "";
+
+	int t = 0;
+	for (i = 0; i < 20; i++) {
+		for (int j = 0; j < 3; j++) {
+			toreturn = toreturn + std::to_string(jointsArray[i][j]);
+			toreturn += " || ";
+			t++;
+		}
+	}
+	return toreturn;
 }
 

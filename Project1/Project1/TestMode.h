@@ -28,6 +28,7 @@ namespace Project1 {
 			//TODO: agregar código de constructor aquí
 			//
 			startThread();
+			//generateModel();
 		}
 
 	protected:
@@ -280,27 +281,41 @@ private: System::Void start_Click(System::Object^  sender, System::EventArgs^  e
 
 	// COMIENZA GRABACIÓN DEL KINECT
 }
-private: System::Void generateModel(DBhandle dbh, Classifier cls) {
-	//System::String^ key;
+private: System::Void generateModel() {
+	System::String^ key;
+	DBhandle dbh;
+	Classifier cls;
 	//double anglessample[] = { 3.05458 , 2.8185 , 2.791 , 2.80899 , 2.76042 , 2.47989 , 2.50082 , 2.03454 , 1.9806 , 1.70052 , 1.60372 , 2.55284 , 2.33598 }; // |
 	//double anglessample[] = { 2.80381, 2.45424, 2.61379, 1.31193, 2.93246, 2.91801, 2.68098, 2.47769, 2.77961, 0.940495, 1.85448, 2.44962, 2.29614 };   // 5
 	//double anglessample[] = { 2.83516, 2.93061, 1.50215, 2.33439, 2.27075, 2.20532, 2.35499, 2.82366, 2.70627, 0.670907, 0.932144, 1.42013, 1.58839 }; // 7
-	//std::string str = "'9,3,6','3,4,3','3,14,5','11,4,3','9,3,6','3,4,3','3,14,5','11,4,3','9,3,6','3,4,3','3,14,5','11,4,3','9,3,6','3,4,3','3,14,5','11,4,3','9,3,6','3,4,3','3,14,5','11,4,3'";
-	dbh.convertJoints2Angles();
+	std::string str = "'0.0110045,-0.151946,2.12533','0.0125442,-0.0869143,2.14724','0.0274368,0.243168,2.13045','0.0222536,0.432776,2.12998','-0.156939,0.135357,2.13567','-0.389568,0.0902263,2.11875','-0.601643,0.109321,2.046','-0.616711,0.103978,2.03227','0.211781,0.144868,2.15629','0.455982,0.0990617,2.15941','0.673471,0.126095,2.12594','0.742052,0.13035,2.11766','-0.0717494,-0.232041,2.11886','-0.350514,-0.389202,1.87437','-0.412709,-0.712733,2.01088','-0.468223,-0.768362,1.9823','0.0874807,-0.237185,2.12243','0.428295,-0.358643,1.93156','0.486307,-0.680899,1.99901','0.523488,-0.745523,1.96448'";
+	//std::string str = "'0.0110045,-0.151946,2.12533','0.0110045,-0.0869143,2.14724','0.0110045,0.243168,2.13045','0.0110045,0.432776,2.12998','0.0110045,0.135357,2.13567','0.0110045,0.0902263,2.11875','0.0110045,0.109321,2.046','0.0110045,0.103978,2.03227','0.0110045,0.144868,2.15629','0.0110045,0.0990617,2.15941','0.0110045,0.126095,2.12594','0.0110045,0.13035,2.11766','-0.0717494,-0.232041,2.11886','-0.350514,-0.389202,1.87437','-0.412709,-0.712733,2.01088','-0.468223,-0.768362,1.9823','0.0874807,-0.237185,2.12243','0.428295,-0.358643,1.93156','0.486307,-0.680899,1.99901','0.523488,-0.745523,1.96448'";
+	//dbh.convertJoints2Angles();
 	dbh.saveDataForTraining();
 	cls.doTraining();
-	/*
-	std::ostringstream strs;
-	strs << cls.doPrediction(dbh.U.jointsToAnglesarray(str));
-	std::string predicted_label = strs.str();
+	double angles[13];
+	std::string returned;
+	returned = dbh.U.jointsToAnglesarray(str, angles);
+	//cls.doPrediction((*double)angles);
 	
+	std::ostringstream strs;
+	//strs << cls.doPrediction((double*)dbh.U.jointsToAnglesarray(str,angles));
+	
+	for (int i = 0; i < 13; i++) {
+		strs << angles[i];
+		strs << " || ";
+	}
+	/*
 	for (auto &i : dbh.U.classtointeger) {
 		if (i.second == predicted_label) {
 			key = gcnew String(i.first.c_str());
 			break; // to stop searching
 		}
 	}
-	MessageBox::Show(key);*/
+	*/
+	//std::string predicted_label = strs.str();
+	MessageBox::Show(gcnew String(strs.str().c_str()));
+	MessageBox::Show(gcnew String(returned.c_str()));
 }
 
 
@@ -308,22 +323,22 @@ private: Thread^ trd;
 public: BOOL predict = FALSE;
 public: 
 
-	private: System::Void getImageFromKinect() {
-		Classifier cls;
-		DBhandle dbh;
-		//dbh.convertJoints2Angles();
-		dbh.saveDataForTraining();
-		cls.doTraining();
-		double anglessample[] = { 3.05458 , 2.8185 , 2.791 , 2.80899 , 2.76042 , 2.47989 , 2.50082 , 2.03454 , 1.9806 , 1.70052 , 1.60372 , 2.55284 , 2.33598 };
-		array<unsigned char>^ buffer = gcnew array<unsigned char>(width*height * 3);
-		std::string joints = "";
-		std::string pos = "";
-		String^ posS = "";
-		std::string position;
-		std::string form;
-		std::string listofpositions;
-		std::string posstack[3] = { "","","" };
-		float angles[13] = { 0,0,0,0,0,0,0,0,0,0,0,0,0 };
+private: System::Void getImageFromKinect() {
+	Classifier cls;
+	DBhandle dbh;
+	//dbh.convertJoints2Angles();
+	dbh.saveDataForTraining();
+	cls.doTraining();
+	double anglessample[] = { 3.05458 , 2.8185 , 2.791 , 2.80899 , 2.76042 , 2.47989 , 2.50082 , 2.03454 , 1.9806 , 1.70052 , 1.60372 , 2.55284 , 2.33598 };
+	array<unsigned char>^ buffer = gcnew array<unsigned char>(width*height * 3);
+	std::string joints = "";
+	std::string pos = "";
+	String^ posS = "";
+	std::string position;
+	std::string form;
+	std::string listofpositions;
+	std::string posstack[3] = { "","","" };
+	double angles[13] = { 0,0,0,0,0,0,0,0,0,0,0,0,0 };
 	//int y = 0;
 	Bitmap^ bmp = gcnew Bitmap(width, height, System::Drawing::Imaging::PixelFormat::Format24bppRgb);
 	System::Drawing::Rectangle^ rect = gcnew System::Drawing::Rectangle(0, 0, bmp->Width, bmp->Height);
@@ -347,13 +362,7 @@ public:
 			if (joints != "") {
 				std::ostringstream strs;
 				dbh.U.jointsToAnglesarray(joints, angles);
-				for (int i = 0; i < 13; i++) {
-					strs << angles[i];
-					strs << " ";
-				}
-				
-				//strs << cls.doPrediction(angles);
-				MessageBox::Show(gcnew String(strs.str().c_str()));
+				strs << cls.doPrediction(angles);
 				//MessageBox::Show(gcnew String(strs.str().c_str()));
 				std::string predicted_label = strs.str();
 				for (auto &i : dbh.U.classtointeger) {
@@ -363,7 +372,7 @@ public:
 					}
 
 				}
-				MessageBox::Show(gcnew String(predicted_label.c_str()));
+
 				posstack[0] = posstack[1];
 				posstack[1] = posstack[2];
 				posstack[2] = position;

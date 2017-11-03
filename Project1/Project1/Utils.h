@@ -35,10 +35,10 @@ class Utils {
 		float dot(float v[], float u[], int size);
 		float norm(float v[], int size);
 		Joint str2joint(std::string str);
-		Utils::Joint Utils::array2joint(float * a);
+		Utils::Joint Utils::array2joint(double a[][3], int i);
 		std::map<std::string,std::string> classtointeger;
 		std::map<std::string, std::string> formmap;
-		float* jointsToAnglesarray(std::string str,float a[]);
+		std::string jointsToAnglesarray(std::string ss,double a[]);
 		
 };
 #endif

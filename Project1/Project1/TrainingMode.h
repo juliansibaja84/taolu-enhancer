@@ -519,7 +519,9 @@ private: System::Void getImageFromKinect() {
 		joints = Connect2Kinect::getPInstance().getData();// esto debe estar aquí porque hay stackoverflow en el getdatargb
 		lockimage = Connect2Kinect::getPInstance().getDataRGB(buffer,1);
 		if (lockimage == 1) {
-			if (joints != "") { addJointsToImageData(buffer, joints); }
+			if (joints != "") {
+				std::string str = "'0.0110045,-0.151946,2.12533','0.0125442,-0.0869143,2.14724','0.0274368,0.243168,2.13045','0.0222536,0.432776,2.12998','-0.156939,0.135357,2.13567','-0.389568,0.0902263,2.11875','-0.601643,0.109321,2.046','-0.616711,0.103978,2.03227','0.211781,0.144868,2.15629','0.455982,0.0990617,2.15941','0.673471,0.126095,2.12594','0.742052,0.13035,2.11766','-0.0717494,-0.232041,2.11886','-0.350514,-0.389202,1.87437','-0.412709,-0.712733,2.01088','-0.468223,-0.768362,1.9823','0.0874807,-0.237185,2.12243','0.428295,-0.358643,1.93156','0.486307,-0.680899,1.99901','0.523488,-0.745523,1.96448'";
+				addJointsToImageData(buffer, str); }
 			System::Drawing::Imaging::BitmapData^ bmp_data = bmp->LockBits(*rect, System::Drawing::Imaging::ImageLockMode::WriteOnly, System::Drawing::Imaging::PixelFormat::Format24bppRgb);
 			System::Runtime::InteropServices::Marshal::Copy(buffer, 0, bmp_data->Scan0, streamsize);
 			bmp->UnlockBits(bmp_data);
@@ -593,7 +595,17 @@ private:System::Void addJointsToImageData(array<unsigned char>^ data, std::strin
 		str.erase(0, post + 1);
 	}
 	jointsArray[i][2] = strtod(str.c_str(), NULL);
-	//MessageBox::Show("string to array done!");
+	
+	std::ostringstream strs;
+
+
+	for (int i = 0; i < 20; i++) {
+		for (int j = 0; j < 3; j++) {
+			strs << jointsArray[i][j];
+			strs << " || ";
+		}
+	}
+	//MessageBox::Show(gcnew String(strs.str().c_str()));
 	// --------------------put joints into image----------------------------------
 	
 	for (int i = 0; i < 20; i++) {
