@@ -231,7 +231,6 @@ namespace Project1 {
 			this->AutoScaleDimensions = System::Drawing::SizeF(11, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Gold;
-			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
 			this->ClientSize = System::Drawing::Size(810, 621);
 			this->Controls->Add(this->button1);
