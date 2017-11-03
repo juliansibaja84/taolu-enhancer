@@ -4,6 +4,7 @@
 #include "Classifier.h"
 #include <msclr\marshal_cppstd.h>
 #include <math.h>
+#include <queue>
 
 namespace Project1 {
 
@@ -43,7 +44,7 @@ namespace Project1 {
 				trd->Abort();
 			}
 		}
-	private: System::Windows::Forms::Label^  title;
+
 	private: System::Windows::Forms::PictureBox^  testimage;
 	protected:
 
@@ -82,7 +83,6 @@ namespace Project1 {
 		{
 			this->components = (gcnew System::ComponentModel::Container());
 			System::ComponentModel::ComponentResourceManager^  resources = (gcnew System::ComponentModel::ComponentResourceManager(TestMode::typeid));
-			this->title = (gcnew System::Windows::Forms::Label());
 			this->testimage = (gcnew System::Windows::Forms::PictureBox());
 			this->panel1 = (gcnew System::Windows::Forms::Panel());
 			this->startop = (gcnew System::Windows::Forms::Label());
@@ -102,27 +102,17 @@ namespace Project1 {
 			this->panel2->SuspendLayout();
 			this->SuspendLayout();
 			// 
-			// title
-			// 
-			this->title->AutoSize = true;
-			this->title->BackColor = System::Drawing::Color::Transparent;
-			this->title->Location = System::Drawing::Point(371, 23);
-			this->title->Margin = System::Windows::Forms::Padding(6, 0, 6, 0);
-			this->title->Name = L"title";
-			this->title->Size = System::Drawing::Size(98, 20);
-			this->title->TabIndex = 0;
-			this->title->Text = L"TEST MODE";
-			// 
 			// testimage
 			// 
 			this->testimage->BackColor = System::Drawing::Color::Transparent;
 			this->testimage->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"testimage.Image")));
-			this->testimage->Location = System::Drawing::Point(331, 66);
+			this->testimage->Location = System::Drawing::Point(79, 12);
 			this->testimage->Name = L"testimage";
-			this->testimage->Size = System::Drawing::Size(441, 363);
+			this->testimage->Size = System::Drawing::Size(640, 480);
 			this->testimage->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->testimage->TabIndex = 1;
 			this->testimage->TabStop = false;
+			this->testimage->Click += gcnew System::EventHandler(this, &TestMode::testimage_Click);
 			// 
 			// panel1
 			// 
@@ -130,7 +120,7 @@ namespace Project1 {
 			this->panel1->Controls->Add(this->startop);
 			this->panel1->Controls->Add(this->stop);
 			this->panel1->Controls->Add(this->start);
-			this->panel1->Location = System::Drawing::Point(81, 312);
+			this->panel1->Location = System::Drawing::Point(658, 498);
 			this->panel1->Name = L"panel1";
 			this->panel1->Size = System::Drawing::Size(73, 100);
 			this->panel1->TabIndex = 2;
@@ -186,9 +176,9 @@ namespace Project1 {
 			this->panel2->Controls->Add(this->predictedform);
 			this->panel2->Controls->Add(this->label2);
 			this->panel2->Controls->Add(this->label1);
-			this->panel2->Location = System::Drawing::Point(12, 136);
+			this->panel2->Location = System::Drawing::Point(67, 498);
 			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(228, 100);
+			this->panel2->Size = System::Drawing::Size(427, 100);
 			this->panel2->TabIndex = 3;
 			// 
 			// predictedpos
@@ -196,18 +186,16 @@ namespace Project1 {
 			this->predictedpos->AutoSize = true;
 			this->predictedpos->Location = System::Drawing::Point(96, 52);
 			this->predictedpos->Name = L"predictedpos";
-			this->predictedpos->Size = System::Drawing::Size(129, 20);
+			this->predictedpos->Size = System::Drawing::Size(0, 20);
 			this->predictedpos->TabIndex = 3;
-			this->predictedpos->Text = L"_______________";
 			// 
 			// predictedform
 			// 
 			this->predictedform->AutoSize = true;
-			this->predictedform->Location = System::Drawing::Point(75, 13);
+			this->predictedform->Location = System::Drawing::Point(96, 12);
 			this->predictedform->Name = L"predictedform";
-			this->predictedform->Size = System::Drawing::Size(129, 20);
+			this->predictedform->Size = System::Drawing::Size(0, 20);
 			this->predictedform->TabIndex = 2;
-			this->predictedform->Text = L"_______________";
 			// 
 			// label2
 			// 
@@ -229,7 +217,7 @@ namespace Project1 {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(73, 253);
+			this->button1->Location = System::Drawing::Point(516, 531);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(92, 32);
 			this->button1->TabIndex = 4;
@@ -244,12 +232,11 @@ namespace Project1 {
 			this->BackColor = System::Drawing::Color::Gold;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
-			this->ClientSize = System::Drawing::Size(784, 441);
+			this->ClientSize = System::Drawing::Size(810, 621);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->testimage);
-			this->Controls->Add(this->title);
 			this->DoubleBuffered = true;
 			this->Font = (gcnew System::Drawing::Font(L"Showcard Gothic", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
@@ -267,7 +254,6 @@ namespace Project1 {
 			this->panel2->ResumeLayout(false);
 			this->panel2->PerformLayout();
 			this->ResumeLayout(false);
-			this->PerformLayout();
 
 		}
 #pragma endregion
@@ -320,18 +306,24 @@ private: System::Void generateModel(DBhandle dbh, Classifier cls) {
 
 private: Thread^ trd;
 public: BOOL predict = FALSE;
+public: 
 
-
-private: System::Void getImageFromKinect() {
-	Classifier cls;
-	DBhandle dbh;
-	generateModel(dbh, cls);
-	array<unsigned char>^ buffer = gcnew array<unsigned char>(width*height*3);
-	MessageBox::Show("holi");
-	std::string joints = "";
-	std::string pos = "";
-	String^ posS = "";
-	String^ key;
+	private: System::Void getImageFromKinect() {
+		Classifier cls;
+		DBhandle dbh;
+		//dbh.convertJoints2Angles();
+		dbh.saveDataForTraining();
+		cls.doTraining();
+		double anglessample[] = { 3.05458 , 2.8185 , 2.791 , 2.80899 , 2.76042 , 2.47989 , 2.50082 , 2.03454 , 1.9806 , 1.70052 , 1.60372 , 2.55284 , 2.33598 };
+		array<unsigned char>^ buffer = gcnew array<unsigned char>(width*height * 3);
+		std::string joints = "";
+		std::string pos = "";
+		String^ posS = "";
+		std::string position;
+		std::string form;
+		std::string listofpositions;
+		std::string posstack[3] = { "","","" };
+		float angles[13] = { 0,0,0,0,0,0,0,0,0,0,0,0,0 };
 	//int y = 0;
 	Bitmap^ bmp = gcnew Bitmap(width, height, System::Drawing::Imaging::PixelFormat::Format24bppRgb);
 	System::Drawing::Rectangle^ rect = gcnew System::Drawing::Rectangle(0, 0, bmp->Width, bmp->Height);
@@ -340,7 +332,7 @@ private: System::Void getImageFromKinect() {
 		joints = Connect2Kinect::getPInstance().getData();// esto debe estar aquí porque hay stackoverflow en el getdatargb
 		lockimage = Connect2Kinect::getPInstance().getDataRGB(buffer, 1);
 		if (lockimage == 1) {
-			//if (joints != "") { addJointsToImageData(buffer, joints); }
+			if (joints != "") { addJointsToImageData(buffer, joints); }
 			System::Drawing::Imaging::BitmapData^ bmp_data = bmp->LockBits(*rect, System::Drawing::Imaging::ImageLockMode::WriteOnly, System::Drawing::Imaging::PixelFormat::Format24bppRgb);
 			System::Runtime::InteropServices::Marshal::Copy(buffer, 0, bmp_data->Scan0, width*height * 3);
 			bmp->UnlockBits(bmp_data);
@@ -351,23 +343,142 @@ private: System::Void getImageFromKinect() {
 			testimage->Invoke(gcnew Action<Image ^>(testimage, &PictureBox::Image::set), bmp);
 			testimage->Invoke(gcnew Action(testimage, &PictureBox::Update));
 		}
-		if (predict) {
+		if (this->predict) {
 			if (joints != "") {
 				std::ostringstream strs;
-				strs << cls.doPrediction(dbh.U.jointsToAnglesarray(joints));
+				dbh.U.jointsToAnglesarray(joints, angles);
+				for (int i = 0; i < 13; i++) {
+					strs << angles[i];
+					strs << " ";
+				}
+				
+				//strs << cls.doPrediction(angles);
+				MessageBox::Show(gcnew String(strs.str().c_str()));
+				//MessageBox::Show(gcnew String(strs.str().c_str()));
 				std::string predicted_label = strs.str();
 				for (auto &i : dbh.U.classtointeger) {
 					if (i.second == predicted_label) {
-						key = gcnew String(("The predicted position is : " + i.first).c_str());
+						position = i.first;
 						break; // to stop searching
 					}
+
 				}
-				MessageBox::Show(key);
+				MessageBox::Show(gcnew String(predicted_label.c_str()));
+				posstack[0] = posstack[1];
+				posstack[1] = posstack[2];
+				posstack[2] = position;
+				listofpositions = posstack[0]+","+posstack[1] + ","+ posstack[2];
+				for (auto &i : dbh.U.formmap) {
+					if (i.second == listofpositions) {
+						form = i.first;
+						break; // to stop searching
+					}
+					else {
+						form = "Unknown";
+					}
+				}
+
+				if (this->predictedpos->IsHandleCreated) {
+					predictedpos->Invoke(gcnew Action<String ^>(predictedpos, &Label::Text::set), gcnew String(position.c_str()));
+					predictedpos->Invoke(gcnew Action(predictedpos, &Label::Update));
+				}
+
+				if (this->predictedform->IsHandleCreated) {
+					predictedform->Invoke(gcnew Action<String ^>(predictedform, &Label::Text::set), gcnew String(form.c_str()));
+					predictedform->Invoke(gcnew Action(predictedform, &Label::Update));
+				}
+				this->predict = FALSE;
+				joints = "";
 			}
 		}
 		Thread::Sleep(10);
 	}
 }
+
+private:System::Void addJointsToImageData(array<unsigned char>^ data, std::string jointsstring) {
+	double jointsArray[20][3], xt, yt, angx, angy, xr, yr, xpix, ypix;
+	int i = 0;
+	INT32 idx;
+	std::string str = jointsstring;
+	size_t pos = 0;
+	size_t post = 0;
+	std::string delimiter = "'";
+	std::string token;
+	str.pop_back();
+	str.erase(0, 1);
+	while ((pos = str.find(delimiter)) != std::string::npos) {
+		token = str.substr(0, pos);
+		str.erase(0, pos + 3);
+		for (int j = 0; j < 2; j++) {
+			post = token.find(",");
+			jointsArray[i][j] = strtod((token.substr(0, post)).c_str(), NULL);
+			token.erase(0, post + 1);
+		}
+		jointsArray[i][2] = strtod(token.c_str(), NULL);
+
+		i++;
+	}
+
+	for (int j = 0; j < 2; j++) {
+		post = str.find(",");
+		jointsArray[i][j] = strtod((str.substr(0, post)).c_str(), NULL);
+		str.erase(0, post + 1);
+	}
+	jointsArray[i][2] = strtod(str.c_str(), NULL);
+	//MessageBox::Show("string to array done!");
+	// --------------------put joints into image----------------------------------
+
+	for (int i = 0; i < 20; i++) {
+		xt = jointsArray[i][0] * 320 / 2.2;
+		yt = jointsArray[i][1] * 240 / 1.6;
+
+		angx = 57 * xt / 640;
+		angy = 43 * yt / 480;
+
+		xr = tan(angx*3.14159265359 / 180) * 640 * 4 / (jointsArray[i][2]);
+		yr = tan(angy*3.14159265359 / 180) * 480 * 4.5 / (jointsArray[i][2]);
+
+		xpix = 320 + xr;
+		ypix = abs(yr - 240) + 15;
+
+		if (abs(xpix) > 639)
+			xpix = 639;
+		if (abs(ypix) > 479)
+			ypix = 479;
+
+		// DRAW IMAGE
+		if (xpix > 0 && xpix < 639) {
+
+			if (ypix > 0 && ypix < 479) {
+				// Inferior
+				idx = (width * 3) * (int(ypix) - 1) + 3 * int(xpix);
+				data[idx] = 0;
+				data[idx + 1] = 255;
+				data[idx + 2] = 0;
+				// Superior
+				idx = (width * 3) * (int(ypix) + 1) + 3 * int(xpix);
+				data[idx] = 0;
+				data[idx + 1] = 255;
+				data[idx + 2] = 0;
+			}
+
+			//  Central
+			idx = (width * 3) * int(ypix) + 3 * int(xpix);
+			data[idx - 3] = 0;
+			data[idx - 2] = 255;
+			data[idx - 1] = 0;
+			data[idx] = 0;
+			data[idx + 1] = 255;
+			data[idx + 2] = 0;
+			data[idx + 3] = 0;
+			data[idx + 4] = 255;
+			data[idx + 5] = 0;
+		}
+	}
+
+
+}
+
 private: System::Void startThread() {
 
 	ThreadStart^ delegate = gcnew ThreadStart(this, &TestMode::getImageFromKinect);
@@ -377,7 +488,9 @@ private: System::Void startThread() {
 
 }
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-	predict = true;
+	this->predict = TRUE;
+}
+private: System::Void testimage_Click(System::Object^  sender, System::EventArgs^  e) {
 }
 };
 }

@@ -3,10 +3,16 @@
 #include <string>
 #include <iostream>
 
-double Utils::calculateAngleProjection(Utils::Joint inferior, Utils::Joint central, Utils::Joint superior) {
-	double angle, cos_angle;
-	double sup_vector[] = { superior.x - central.x, superior.y - central.y, superior.z - central.z };
-	double inf_vector[] = { inferior.x - central.x, inferior.y - central.y, inferior.z - central.z };
+Utils::Utils() {
+	formmap.insert(std::pair<std::string, std::string>("Strike the hearth with fist", "horse-with-separate-palms,bow-with-grip,heart-strike"));
+	formmap.insert(std::pair<std::string, std::string>("Brush hand and fist in bow stance", "hit-with-elbows,rush-hand,thrust-fist"));
+	formmap.insert(std::pair<std::string, std::string>("Twist body and thrust fist in rest stance", "thrust-fist,circular-hammer-fist,left-fist-rest-stance"));
+}
+
+float Utils::calculateAngleProjection(Utils::Joint inferior, Utils::Joint central, Utils::Joint superior) {
+	float angle, cos_angle;
+	float sup_vector[] = { superior.x - central.x, superior.y - central.y, superior.z - central.z };
+	float inf_vector[] = { inferior.x - central.x, inferior.y - central.y, inferior.z - central.z };
 
 	cos_angle = Utils::dot(sup_vector, inf_vector,3) / (Utils::norm(sup_vector,3)*Utils::norm(inf_vector,3));
 	angle = acos(cos_angle);
@@ -15,16 +21,16 @@ double Utils::calculateAngleProjection(Utils::Joint inferior, Utils::Joint centr
 	return angle;
 }
 
-double Utils::dot(double v[], double u[],int size){
-	double result = 0;
+float Utils::dot(float v[], float u[],int size){
+	float result = 0;
 	for (int i = 0; i < size; i++) {
 		result += v[i] * u[i];
 	}
 	return result;
 }
 
-double Utils::norm(double v[], int size) {
-	double result = 0;
+float Utils::norm(float v[], int size) {
+	float result = 0;
 	for (int i = 0; i < size; i++) {
 		result += pow(v[i],2);
 	}
@@ -41,7 +47,7 @@ Utils::Joint Utils::str2joint(std::string str) {
 	J.z = std::stof(str.substr(pl + 1));
 	return J;
 }
-Utils::Joint Utils::array2joint(double * a) {
+Utils::Joint Utils::array2joint(float * a) {
 	Utils::Joint J;
 	J.x = a[0];
 	J.y = a[1];
@@ -49,9 +55,9 @@ Utils::Joint Utils::array2joint(double * a) {
 	return J;
 }
 
-double* Utils::jointsToAnglesarray(std::string str) {
-	double jointsArray[20][3];
-	double a[13];
+float* Utils::jointsToAnglesarray(std::string str, float a[]) {
+	float jointsArray[20][3];
+	//float a[13];
 	int i = 0, idx;
 	size_t pos = 0;
 	size_t post = 0;
@@ -69,7 +75,7 @@ double* Utils::jointsToAnglesarray(std::string str) {
 			jointsArray[i][j] = strtof((token.substr(0, pos)).c_str(), 0);
 			token.erase(0, pos + 1);
 		}
-		jointsArray[i][3] = strtof(token.c_str(), 0);
+		jointsArray[i][2] = strtof(token.c_str(), 0);
 		i++;
 	}
 	str.pop_back();
@@ -79,6 +85,7 @@ double* Utils::jointsToAnglesarray(std::string str) {
 		jointsArray[i][j] = strtof((str.substr(0, pos)).c_str(), 0);
 		str.erase(0, pos + 1);
 	}
+	jointsArray[i][2] = strtod(str.c_str(), NULL);
 	Utils::Joint J1, J2, J3;
 	// Neck - Head Angle :
 	J3 = array2joint(jointsArray[JD.NUI_SKELETON_POSITION_SPINE]);
@@ -148,3 +155,4 @@ double* Utils::jointsToAnglesarray(std::string str) {
 
 	return a;
 }
+

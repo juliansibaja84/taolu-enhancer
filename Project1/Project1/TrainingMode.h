@@ -475,7 +475,7 @@ private: System::Void centralpos_Click(System::Object^  sender, System::EventArg
 		currentpos = "rush-hand";
 	}
 	else if (currentform == "form3") {
-		currentpos = "circular-hammel-fist";
+		currentpos = "circular-hammer-fist";
 	}
 	else {
 		currentpos = "";
@@ -659,36 +659,6 @@ private:System::Void addJointsToImageData(array<unsigned char>^ data, std::strin
 	//data[idx + 1] = 255;
 	//data[idx + 2] = 0;
 	
-}
-private: System::Void TransformJointsStringToArray(float jointsArray[][3], std::string jointsstring) {
-	std::string str = jointsstring;
-	size_t pos = 0;
-	size_t post = 0;
-	std::string delimiter = "'";
-	std::string token;
-	int i = 0;
-	str.pop_back();
-	str.erase(0, 1);
-	while ((pos = str.find(delimiter)) != std::string::npos) {
-		token = str.substr(0, pos);
-		str.erase(0, pos + 3);
-		token.pop_back();
-		token.erase(0,1);
-		for (int j = 0; j < 2; j++) {
-			post = token.find(",");
-			jointsArray[i][j] = strtof((token.substr(0, pos)).c_str(),0);
-			token.erase(0, pos + 1);
-		}
-		jointsArray[i][3] = strtof(token.c_str(), 0);
-		i++;
-	}
-	str.pop_back();
-	str.erase(0, 1);
-	for (int j = 0; j < 2; j++) {
-		post = str.find(",");
-		jointsArray[i][j] = strtof((str.substr(0, pos)).c_str(), 0);
-		str.erase(0, pos + 1);
-	}
 }
 private: System::Void startThread() {
 	

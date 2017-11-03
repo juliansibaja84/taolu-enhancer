@@ -373,9 +373,6 @@ double Classifier::doPrediction(double * angles, int predict_P)
 	}
 
 	double predict_label;
-
-	//x[i].index = 1;
-	//x[i].value = 0;
 	for (i = 0; i < 13; i++) {
 		x[i].index = i+1;
 		x[i].value = angles[i];
