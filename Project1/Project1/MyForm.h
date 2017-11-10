@@ -83,7 +83,7 @@ namespace Project1 {
 			this->label1->Font = (gcnew System::Drawing::Font(L"Showcard Gothic", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label1->ForeColor = System::Drawing::SystemColors::Desktop;
-			this->label1->Location = System::Drawing::Point(105, 59);
+			this->label1->Location = System::Drawing::Point(107, 44);
 			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(124, 23);
@@ -96,7 +96,7 @@ namespace Project1 {
 			this->test->BackColor = System::Drawing::Color::Transparent;
 			this->test->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->test->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"test.Image")));
-			this->test->Location = System::Drawing::Point(196, 137);
+			this->test->Location = System::Drawing::Point(200, 137);
 			this->test->Margin = System::Windows::Forms::Padding(4);
 			this->test->Name = L"test";
 			this->test->Size = System::Drawing::Size(77, 77);
@@ -141,7 +141,7 @@ namespace Project1 {
 			this->label3->Font = (gcnew System::Drawing::Font(L"Showcard Gothic", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label3->ForeColor = System::Drawing::Color::Black;
-			this->label3->Location = System::Drawing::Point(210, 112);
+			this->label3->Location = System::Drawing::Point(215, 112);
 			this->label3->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(47, 20);
@@ -157,7 +157,7 @@ namespace Project1 {
 			this->BackColor = System::Drawing::Color::PaleTurquoise;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->ClientSize = System::Drawing::Size(331, 331);
+			this->ClientSize = System::Drawing::Size(334, 331);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->pictureBox2);
@@ -172,7 +172,7 @@ namespace Project1 {
 			this->Name = L"MyForm";
 			this->RightToLeftLayout = true;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"Inicio";
+			this->Text = L"Main";
 			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->test))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();

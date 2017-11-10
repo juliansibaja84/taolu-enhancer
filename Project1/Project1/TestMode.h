@@ -29,6 +29,9 @@ namespace Project1 {
 			//
 			startThread();
 			//generateModel();
+			this->stop->Visible = FALSE;
+			this->start->Visible = FALSE;
+			this->startop->Visible = FALSE;
 		}
 
 	protected:
@@ -107,7 +110,7 @@ namespace Project1 {
 			// 
 			this->testimage->BackColor = System::Drawing::Color::Transparent;
 			this->testimage->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"testimage.Image")));
-			this->testimage->Location = System::Drawing::Point(79, 12);
+			this->testimage->Location = System::Drawing::Point(80, 12);
 			this->testimage->Name = L"testimage";
 			this->testimage->Size = System::Drawing::Size(640, 480);
 			this->testimage->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
@@ -179,7 +182,7 @@ namespace Project1 {
 			this->panel2->Controls->Add(this->label1);
 			this->panel2->Location = System::Drawing::Point(67, 498);
 			this->panel2->Name = L"panel2";
-			this->panel2->Size = System::Drawing::Size(427, 100);
+			this->panel2->Size = System::Drawing::Size(443, 100);
 			this->panel2->TabIndex = 3;
 			// 
 			// predictedpos
@@ -205,20 +208,20 @@ namespace Project1 {
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(91, 20);
 			this->label2->TabIndex = 1;
-			this->label2->Text = L"posición:";
+			this->label2->Text = L"Position:";
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
 			this->label1->Location = System::Drawing::Point(3, 13);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(71, 20);
+			this->label1->Size = System::Drawing::Size(61, 20);
 			this->label1->TabIndex = 0;
-			this->label1->Text = L"forma:";
+			this->label1->Text = L"Form:";
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(516, 531);
+			this->button1->Location = System::Drawing::Point(542, 531);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(92, 32);
 			this->button1->TabIndex = 4;
@@ -230,9 +233,10 @@ namespace Project1 {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(11, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->BackColor = System::Drawing::Color::Gold;
-			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Center;
-			this->ClientSize = System::Drawing::Size(810, 621);
+			this->BackColor = System::Drawing::Color::SeaShell;
+			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
+			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->ClientSize = System::Drawing::Size(804, 621);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->panel1);
