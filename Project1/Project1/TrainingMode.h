@@ -71,6 +71,7 @@ namespace Project1 {
 	private: System::Windows::Forms::PictureBox^  centralpos;
 	private: System::Windows::Forms::PictureBox^  initialpos;
 	private: System::Windows::Forms::PictureBox^  back;
+	private: System::Windows::Forms::Button^  button1;
 
 
 	protected:
@@ -109,6 +110,7 @@ namespace Project1 {
 			this->centralpos = (gcnew System::Windows::Forms::PictureBox());
 			this->initialpos = (gcnew System::Windows::Forms::PictureBox());
 			this->postitle = (gcnew System::Windows::Forms::Label());
+			this->button1 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->trainingimage))->BeginInit();
 			this->panel1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->newform))->BeginInit();
@@ -375,6 +377,16 @@ namespace Project1 {
 			this->postitle->TabIndex = 0;
 			this->postitle->Text = L"chosse a position!";
 			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(68, 433);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(79, 31);
+			this->button1->TabIndex = 15;
+			this->button1->Text = L"C2A";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &TrainingMode::button1_Click);
+			// 
 			// TrainingMode
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(11, 20);
@@ -383,6 +395,7 @@ namespace Project1 {
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->ClientSize = System::Drawing::Size(904, 501);
+			this->Controls->Add(this->button1);
 			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->panel2);
 			this->Controls->Add(this->trainingimage);
@@ -678,6 +691,12 @@ private: System::Void startThread() {
 	(*trd).IsBackground = true;
 	(*trd).Start();
 
+}
+private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+	DBhandle dbh;
+	dbh.convertJoints2Angles();
+	System::String^ message;
+	MessageBox::Show("Operation Completed!");
 }
 };
 }
