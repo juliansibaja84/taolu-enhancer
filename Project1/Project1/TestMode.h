@@ -28,7 +28,6 @@ namespace Project1 {
 			//TODO: agregar código de constructor aquí
 			//
 			startThread();
-			//generateModel();
 			this->stop->Visible = FALSE;
 			this->start->Visible = FALSE;
 			this->startop->Visible = FALSE;
@@ -329,7 +328,6 @@ public:
 private: System::Void getImageFromKinect() {
 	Classifier cls;
 	DBhandle dbh;
-	//dbh.convertJoints2Angles();
 	dbh.saveDataForTraining();
 	cls.doTraining();
 	double anglessample[] = { 3.05458 , 2.8185 , 2.791 , 2.80899 , 2.76042 , 2.47989 , 2.50082 , 2.03454 , 1.9806 , 1.70052 , 1.60372 , 2.55284 , 2.33598 };
@@ -347,7 +345,7 @@ private: System::Void getImageFromKinect() {
 	System::Drawing::Rectangle^ rect = gcnew System::Drawing::Rectangle(0, 0, bmp->Width, bmp->Height);
 	int lockimage = 0;
 	while (1) {
-		joints = Connect2Kinect::getPInstance().getData();// esto debe estar aquí porque hay stackoverflow en el getdatargb
+		joints = Connect2Kinect::getPInstance().getData();
 		lockimage = Connect2Kinect::getPInstance().getDataRGB(buffer, 1);
 		if (lockimage == 1) {
 			if (joints != "") { addJointsToImageData(buffer, joints); }

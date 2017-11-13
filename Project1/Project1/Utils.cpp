@@ -4,7 +4,7 @@
 
 
 Utils::Utils() {
-	formmap.insert(std::pair<std::string, std::string>("Strike the hearth with fist", "horse-with-separate-palms,bow-with-grip,heart-strike"));
+	formmap.insert(std::pair<std::string, std::string>("Strike the heart with fist", "horse-with-separate-palms,bow-with-grip,heart-strike"));
 	formmap.insert(std::pair<std::string, std::string>("Brush hand and fist in bow stance", "hit-with-elbows,rush-hand,thrust-fist"));
 	formmap.insert(std::pair<std::string, std::string>("Twist body and thrust fist in rest stance", "thrust-fist,circular-hammer-fist,left-fist-rest-stance"));
 }

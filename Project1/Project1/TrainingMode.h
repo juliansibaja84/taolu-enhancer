@@ -1,6 +1,7 @@
 #pragma once
 #include "DBhandle.h"
 #include "Connect2Kinect.h"
+#include "Classifier.h"
 #include <string>
 #include <msclr\marshal_cppstd.h>
 #include <math.h>
@@ -441,7 +442,7 @@ private: System::Void form1_Click(System::Object^  sender, System::EventArgs^  e
 	currentform = "form1";
 	panel2->Visible = true;
 	panel1->Visible = false;
-	// form = "Strike the hearth with fist";
+	// form = "Strike the heart with fist";
 }
 private: System::Void form2_Click(System::Object^  sender, System::EventArgs^  e) {
 	currentform = "form2";
@@ -694,7 +695,10 @@ private: System::Void startThread() {
 }
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 	DBhandle dbh;
+	Classifier cls;
 	dbh.convertJoints2Angles();
+	dbh.saveDataForTraining();
+	cls.doTraining();
 	System::String^ message;
 	MessageBox::Show("Operation Completed!");
 }
